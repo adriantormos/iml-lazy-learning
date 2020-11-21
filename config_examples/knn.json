@@ -1,0 +1,12 @@
+{
+    "data": {
+        "name": "kropt",
+        "balance": 0,
+        "prepare": [{"name": "shuffle"}]
+    },
+    "algorithm": {
+        "name": "knn"
+    },
+    "charts": [],
+    "manual_seed": 0
+}

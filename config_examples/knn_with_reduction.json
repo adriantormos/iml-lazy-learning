@@ -1,0 +1,14 @@
+{
+    "data": {
+        "name": "kropt",
+        "prepare": [{"name": "shuffle"}]
+    },
+    "reduce_method": {
+        "name": "empty"
+    },
+    "algorithm": {
+        "name": "knn"
+    },
+    "charts": [],
+    "manual_seed": 0
+}
