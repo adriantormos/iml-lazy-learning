@@ -1,39 +1,25 @@
+import string
 from src.data.dataset import Dataset
-from src.auxiliary.file_methods import load_arff
 import numpy as np
 import pandas as pd
 from sklearn.preprocessing import LabelEncoder, MinMaxScaler
 
+
 class KroptDataset(Dataset):
 
-    # Main methods
-
     def __init__(self, config, verbose):
-        super(KroptDataset, self).__init__(config, verbose)
-        self.data, _ = load_arff('kropt')
-        self.data = pd.DataFrame(self.data)
+        self.name = 'kropt'
         self.balance = config['balance']
         self.verbose = verbose
         self.krops_category_mapping = {'a': 1, 'b': 2, 'c': 3, 'd': 4, 'e': 5, 'f': 6, 'g': 7, 'h': 8}
-        self.preprocessed_data = self.preprocess_dataset()
+        super(KroptDataset, self).__init__(config, verbose)
 
-    def get_preprocessed_data(self) -> (np.ndarray, np.ndarray):
-        values = self.preprocessed_data.loc[:, self.preprocessed_data.columns != 'game'].to_numpy()
-        labels = self.preprocessed_data['game'].to_numpy()
-        return values, labels
+    # Main methods
 
-    def get_preprocessed_dataframe(self) -> pd.DataFrame:
-        return self.preprocessed_data
+    def get_dataset_name(self) -> string:
+        return self.name
 
-    # Auxiliary methods
-
-    def transform_krops_col_to_numeric(self, column, column_name: str):
-        if 'row' in column_name:
-            return [int(x.decode('utf-8')) for x in column]
-        return [self.krops_category_mapping[x.decode('utf-8')] for x in column]
-
-    def preprocess_dataset(self):
-        data = self.data
+    def preprocess_data(self, data: pd.DataFrame) -> (np.ndarray, np.ndarray):
         columns = data.columns
 
         ss = MinMaxScaler()
@@ -68,4 +54,15 @@ class KroptDataset(Dataset):
 
         le.fit(data['game'])
         data['game'] = le.transform(data['game'])
-        return data
+
+        values = data.loc[:, data.columns != 'game'].to_numpy()
+        labels = data['game'].to_numpy()
+
+        return values, labels
+
+    # Auxiliary methods
+
+    def transform_krops_col_to_numeric(self, column, column_name: str):
+        if 'row' in column_name:
+            return [int(x.decode('utf-8')) for x in column]
+        return [self.krops_category_mapping[x.decode('utf-8')] for x in column]

@@ -1,23 +1,20 @@
+import string
 from src.data.dataset import Dataset
-from src.auxiliary.file_methods import load_arff
 import numpy as np
 import pandas as pd
-from sklearn.preprocessing import LabelEncoder, MinMaxScaler
+
 
 class AdultDataset(Dataset):
 
-    # Main methods
-
     def __init__(self, config, verbose):
+        self.name = 'adult'
         super(AdultDataset, self).__init__(config, verbose)
 
-    def get_preprocessed_data(self) -> (np.ndarray, np.ndarray):
+    # Main methods
+
+    def get_dataset_name(self) -> string:
+        return self.name
+
+    def preprocess_data(self, data: pd.DataFrame) -> (np.ndarray, np.ndarray):
+        # TODO implement this
         pass
-
-    def get_preprocessed_dataframe(self) -> pd.DataFrame:
-        pass
-
-    # Auxiliary methods
-
-    def preprocess_dataset(self):
-        return None

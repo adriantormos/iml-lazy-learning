@@ -4,7 +4,6 @@ from src.auxiliary.file_methods import load_json, save_json
 from src.factory.dataset import DatasetFactory
 from src.factory.algorithm import AlgorithmFactory
 from src.factory.reduce_method import ReduceMethodFactory
-from src.visualize import show_charts
 import random
 import numpy as np
 
@@ -45,28 +44,21 @@ def main(config_path: str, output_path: str, visualize: bool, verbose: bool):
 
     # Load and prepare data
     dataset = DatasetFactory.select_dataset(data_config, verbose)
-    values, labels = dataset.get_preprocessed_data()
-    values, labels = dataset.prepare(values, labels)
+    train_loader = dataset.get_train_loader()
+    test_loader = dataset.get_test_loader()
 
     # Run reduction method if required
     if 'reduce_method' in config:
         reduce_method_config = config['reduce_method']
         reduce_method = ReduceMethodFactory.select_reduce_method(reduce_method_config, output_path, verbose)
-        reduce_method.reduce_data(values, labels)
+        reduce_method.reduce_data(train_loader)
 
     # Run algorithm if required
     if 'algorithm' in config:
         algorithm_config = config['algorithm']
         algorithm = AlgorithmFactory.select_supervised_algorithm(algorithm_config, output_path, verbose)
-        output_train_labels, output_test_labels = algorithm.classify(values, labels, None)
-
-        # TODO finish this
-        #show_charts(charts_config, output_path, values, labels, output_labels, visualize, dataset.get_preprocessed_dataframe(), verbose)
-        #if output_path is not None:
-        #    np.save(output_path + '/predicted_labels', output_labels)
-    else:
-        show_charts(charts_config, output_path, values, labels, None, visualize, dataset.get_preprocessed_dataframe(), verbose)
-
+        algorithm.classify(train_loader, test_loader)
+        algorithm.show_results()
 
     # Save config json
     if output_path is not None:
@@ -75,7 +67,7 @@ def main(config_path: str, output_path: str, visualize: bool, verbose: bool):
 
 if __name__ == '__main__':
     args = parse_arguments()
-    # redirect program output
+    # redirect program output if required
     if not args.visualize and args.output_path:
         f = open(args.output_path + '/log.txt', 'w')
         sys.stdout = f

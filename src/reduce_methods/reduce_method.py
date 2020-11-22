@@ -1,5 +1,5 @@
 import abc
-import numpy as np
+from src.data.dataset import DataLoader
 
 
 class ReduceMethod:
@@ -15,9 +15,9 @@ class ReduceMethod:
     def __init__(self, config, output_path, verbose):
         pass
 
-    def reduce_data(self, values: np.ndarray, labels: np.ndarray) -> (np.ndarray, np.ndarray):
-        return self.run(values, labels)
+    def reduce_data(self, train_loader: DataLoader) -> DataLoader:
+        return self.run(train_loader)
 
     @abc.abstractmethod
-    def run(self, values: np.ndarray, labels: np.ndarray) -> (np.ndarray, np.ndarray):
-        raise NotImplementedError('Method not implemented in interface class')
+    def run(self, data_loader: DataLoader) -> DataLoader:
+        raise NotImplementedError('Method not implemented in abstract class')
