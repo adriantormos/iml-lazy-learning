@@ -2,6 +2,7 @@ from src.algorithms.supervised_algorithm import SupervisedAlgorithm
 import bisect
 import numpy as np
 from collections import Counter
+from scipy.spatial.distance import cosine
 
 
 class KNNAlgorithm(SupervisedAlgorithm):
@@ -71,6 +72,14 @@ class KNNAlgorithm(SupervisedAlgorithm):
 
 def euclidean_distance_metric(x: np.ndarray, y: np.ndarray):
     return np.linalg.norm(x-y)
+
+
+def manhattan_distance_metric(x: np.ndarray, y: np.ndarray):
+    return np.sum(np.abs(x-y))
+
+
+def cosine_distance_metric(x: np.ndarray, y: np.ndarray):
+    return cosine(x, y)
 
 
 def majority_voting_method(k_close_distances: list, k_close_labels: list):
