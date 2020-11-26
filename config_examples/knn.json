@@ -4,7 +4,11 @@
         "balance": 0
     },
     "algorithm": {
-        "name": "knn"
+        "name": "knn",
+	"k": 5,
+	"distance_metric": "euclidean",
+	"voting": "majority",
+	"weighting": "equal"
     },
     "charts": [],
     "manual_seed": 0

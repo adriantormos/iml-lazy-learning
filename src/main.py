@@ -6,6 +6,7 @@ from src.factory.algorithm import AlgorithmFactory
 from src.factory.reduce_method import ReduceMethodFactory
 import random
 import numpy as np
+from time import time
 
 
 def parse_arguments():
@@ -43,26 +44,38 @@ def main(config_path: str, output_path: str, visualize: bool, verbose: bool):
     np.random.seed(config['manual_seed'])
 
     # Load and prepare data
+    print('Preparing data')
+    initial_time = time()
     dataset = DatasetFactory.select_dataset(data_config, verbose)
     train_loader = dataset.get_train_loader()
     test_loader = dataset.get_test_loader()
+    print('Finished preparing data; elapsed time:', time() - initial_time)
 
     # Run reduction method if required
     if 'reduce_method' in config:
+        print('\nReducing data')
+        initial_time = time()
         reduce_method_config = config['reduce_method']
         reduce_method = ReduceMethodFactory.select_reduce_method(reduce_method_config, output_path, verbose)
         reduce_method.reduce_data(train_loader)
+        print('Finished reducing data; elapsed time:', time() - initial_time)
 
     # Run algorithm if required
     if 'algorithm' in config:
+        print('\nRunning algorithm')
+        initial_time = time()
         algorithm_config = config['algorithm']
         algorithm = AlgorithmFactory.select_supervised_algorithm(algorithm_config, output_path, verbose)
         algorithm.classify(train_loader, test_loader)
         algorithm.show_results()
+        algorithm_total_time = time() - initial_time
+        print('Finished running algorithm; elapsed time:', algorithm_total_time)
 
     # Save config json
     if output_path is not None:
         save_json(output_path + '/config', config)
+        if 'algorithm' in config:
+            save_json(output_path + '/algorithm_total_time', algorithm_total_time)
 
 
 if __name__ == '__main__':

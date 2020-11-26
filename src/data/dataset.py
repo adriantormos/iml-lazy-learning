@@ -29,8 +29,8 @@ class DataLoader():
     def reset(self):
         self.iter = 0
 
-    def get_shape(self):
-        return self.values.shape
+    def get_length(self):
+        return len(self.values)
 
 
 class Dataset(metaclass=abc.ABCMeta):

@@ -1,6 +1,7 @@
 import abc
 import numpy as np
 from src.data.dataset import DataLoader
+from sklearn.metrics import accuracy_score
 
 
 class SupervisedAlgorithm:
@@ -19,7 +20,7 @@ class SupervisedAlgorithm:
         pass
 
     def classify(self, train_loader: DataLoader, test_loader: DataLoader):
-        self.output_scores = []
+        self.output_scores = np.zeros(train_loader.get_length())
         train_loader.reset()
         test_loader.reset()
 
@@ -34,18 +35,16 @@ class SupervisedAlgorithm:
             predicted_labels = self.test(test_values)
 
             score = self.compute_score(test_labels, predicted_labels)
-            self.output_scores.append(score)
+            self.output_scores[train_loader.get_index()-1] = score
 
             train_data = train_loader.next()
             test_data = test_loader.next()
 
     def compute_score(self, original_labels: np.ndarray, predicted_labels: np.ndarray) -> np.float:
-        # TODO implement this
-        return 0
+        return accuracy_score(original_labels, predicted_labels)
 
     def show_results(self):
-        # TODO implement this
-        print(self.output_scores)
+        print('Mean accuracy:', np.mean(self.output_scores))
 
     # Subclass main methods
 
@@ -54,5 +53,5 @@ class SupervisedAlgorithm:
         raise NotImplementedError('Method not implemented in abstract class')
 
     @abc.abstractmethod
-    def test(self, values: np.ndarray) -> np.ndarray:
+    def test(self, test_values: np.ndarray) -> np.ndarray:
         raise NotImplementedError('Method not implemented in abstract class')
