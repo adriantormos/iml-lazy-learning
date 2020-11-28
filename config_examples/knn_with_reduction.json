@@ -1,14 +1,15 @@
 {
-    "data": {
-        "name": "kropt",
-	"balance": 0
-    },
-    "reduce_method": {
-        "name": "empty"
-    },
-    "algorithm": {
-        "name": "knn"
-    },
-    "charts": [],
-    "manual_seed": 0
+  "data": {
+    "name": "kropt",
+    "balance": 0,
+    "encoding": "numeric"
+  },
+  "reduce_method": {
+    "name": "empty"
+  },
+  "algorithm": {
+    "name": "knn"
+  },
+  "charts": [],
+  "manual_seed": 0
 }

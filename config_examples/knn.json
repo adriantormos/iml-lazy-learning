@@ -1,15 +1,16 @@
 {
-    "data": {
-        "name": "kropt",
-        "balance": 0
-    },
-    "algorithm": {
-        "name": "knn",
-	"k": 5,
-	"distance_metric": "euclidean",
-	"voting": "majority",
-	"weighting": "equal"
-    },
-    "charts": [],
-    "manual_seed": 0
+  "data": {
+    "name": "kropt",
+    "balance": 0,
+    "encoding": "one_hot_encoding"
+  },
+  "algorithm": {
+    "name": "knn",
+    "k": 5,
+    "distance_metric": "euclidean",
+    "voting": "majority",
+    "weighting": "equal"
+  },
+  "charts": [],
+  "manual_seed": 0
 }
