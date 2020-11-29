@@ -2,6 +2,7 @@ import abc
 import numpy as np
 from src.data.dataset import DataLoader
 from sklearn.metrics import accuracy_score
+from time import time
 
 
 class SupervisedAlgorithm:
@@ -21,13 +22,17 @@ class SupervisedAlgorithm:
 
     def classify(self, train_loader: DataLoader, test_loader: DataLoader):
         self.output_scores = np.zeros(train_loader.get_length())
+        print('Starting', train_loader.get_length(), '- fold')
         train_loader.reset()
         test_loader.reset()
 
         train_data = train_loader.next()
         test_data = test_loader.next()
 
+        index = 0
         while train_data is not None:
+            print('Doing step', index)
+            init = time()
             train_values, train_labels = train_data
             test_values, test_labels = test_data
 
@@ -39,6 +44,8 @@ class SupervisedAlgorithm:
 
             train_data = train_loader.next()
             test_data = test_loader.next()
+            index += 1
+            print('Step', index, 'finished in', time() - init, 'seconds. Score:', score)
 
     def compute_score(self, original_labels: np.ndarray, predicted_labels: np.ndarray) -> np.float:
         return accuracy_score(original_labels, predicted_labels)

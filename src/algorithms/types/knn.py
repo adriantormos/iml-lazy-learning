@@ -26,7 +26,7 @@ class KNNAlgorithm(SupervisedAlgorithm):
             raise Exception('The chosen weighting method does not exist')
 
     def train(self, values: np.ndarray, labels: np.ndarray):
-        print(values.shape)
+        print('    Train shape:', values.shape)
         if values.shape[0] < self.k:
             raise Exception('The number of samples of the training set is inferior to the k parameter')
         self.train_values = values
@@ -34,9 +34,8 @@ class KNNAlgorithm(SupervisedAlgorithm):
 
     def test(self, test_values: np.ndarray) -> np.ndarray:
         predicted_labels = np.zeros(test_values.shape[0])
-        print(test_values.shape)
+        print('    Test shape:', test_values.shape)
         for index, test_value in enumerate(test_values):
-            print(index)
             k_close_distances, k_close_labels = self.find_k_close_values(test_value)
             predicted_labels[index] = self.voting(k_close_distances, k_close_labels)
         return predicted_labels
@@ -46,6 +45,7 @@ class KNNAlgorithm(SupervisedAlgorithm):
     def find_k_close_values(self, test_value) -> (list, list):
         # pre: self.train_values.shape[0] > k
 
+        # lists to maintain in ascending order the k closer values
         k_close_distances = []
         k_close_labels = []
 
