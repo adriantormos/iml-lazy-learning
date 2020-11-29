@@ -1,8 +1,9 @@
-from src.algorithms.supervised_algorithm import SupervisedAlgorithm
-import bisect
-import numpy as np
 from collections import Counter
-from scipy.spatial.distance import cosine
+
+import numpy as np
+from scipy.spatial.distance import cdist
+
+from src.algorithms.supervised_algorithm import SupervisedAlgorithm
 
 
 class KNNAlgorithm(SupervisedAlgorithm):
@@ -13,8 +14,11 @@ class KNNAlgorithm(SupervisedAlgorithm):
         super().__init__(config, output_path, verbose)
         self.k = config['k']
         try:
-            self.distance_metric = eval(config['distance_metric'] + '_distance_metric')
-        except:
+            # self.distance_metric = eval(config['distance_metric'] + '_distance_metric')
+            self.distance_metric = config['distance_metric']
+            if self.distance_metric == 'manhattan':
+                self.distance_metric = 'cityblock'
+        except KeyError:
             raise Exception('The chosen distance metric does not exist')
         try:
             self.voting = eval(config['voting'] + '_voting_method')
@@ -42,47 +46,12 @@ class KNNAlgorithm(SupervisedAlgorithm):
 
     # Auxiliary methods
 
-    def find_k_close_values(self, test_value) -> (list, list):
+    def find_k_close_values(self, test_value: np.ndarray) -> (list, list):
         # pre: self.train_values.shape[0] > k
 
-        # lists to maintain in ascending order the k closer values
-        k_close_distances = []
-        k_close_labels = []
-
-        # initialize first k close distances
-        for index in range(self.k):
-            distance_score = self.distance_metric(self.train_values[index], test_value)
-            pos_to_insert = bisect.bisect(k_close_distances, distance_score)
-            k_close_distances.insert(pos_to_insert, distance_score)
-            k_close_labels.insert(pos_to_insert, self.train_labels[index])
-
-        # find the k close values
-        max_k_score = k_close_distances[-1]
-        for index, train_value in enumerate(self.train_values[self.k:]):
-            distance_score = self.distance_metric(train_value, test_value)
-            if distance_score < max_k_score:
-                del k_close_distances[-1]
-                del k_close_labels[-1]
-                pos_to_insert = bisect.bisect(k_close_distances, distance_score)
-                k_close_distances.insert(pos_to_insert, distance_score)
-                k_close_labels.insert(pos_to_insert, self.train_labels[index + self.k])
-                max_k_score = k_close_distances[-1]
-
-        return k_close_distances, k_close_labels
-
-
-# Static util functions for the knn algorithm
-
-def euclidean_distance_metric(x: np.ndarray, y: np.ndarray):
-    return np.linalg.norm(x-y)
-
-
-def manhattan_distance_metric(x: np.ndarray, y: np.ndarray):
-    return np.sum(np.abs(x-y))
-
-
-def cosine_distance_metric(x: np.ndarray, y: np.ndarray):
-    return cosine(x, y)
+        distances_to_test_value = cdist(np.array([test_value]), self.train_values, self.distance_metric)[0]
+        sorted_args = distances_to_test_value.argsort()[:self.k]
+        return distances_to_test_value[sorted_args], self.train_labels[sorted_args]
 
 
 def majority_voting_method(k_close_distances: list, k_close_labels: list):
