@@ -26,6 +26,7 @@ class KNNAlgorithm(SupervisedAlgorithm):
             raise Exception('The chosen weighting method does not exist')
 
     def train(self, values: np.ndarray, labels: np.ndarray):
+        print(values.shape)
         if values.shape[0] < self.k:
             raise Exception('The number of samples of the training set is inferior to the k parameter')
         self.train_values = values
@@ -33,7 +34,9 @@ class KNNAlgorithm(SupervisedAlgorithm):
 
     def test(self, test_values: np.ndarray) -> np.ndarray:
         predicted_labels = np.zeros(test_values.shape[0])
+        print(test_values.shape)
         for index, test_value in enumerate(test_values):
+            print(index)
             k_close_distances, k_close_labels = self.find_k_close_values(test_value)
             predicted_labels[index] = self.voting(k_close_distances, k_close_labels)
         return predicted_labels
@@ -55,14 +58,14 @@ class KNNAlgorithm(SupervisedAlgorithm):
 
         # find the k close values
         max_k_score = k_close_distances[-1]
-        for index, train_value in enumerate(self.train_values[:self.k]):
+        for index, train_value in enumerate(self.train_values[self.k:]):
             distance_score = self.distance_metric(train_value, test_value)
             if distance_score < max_k_score:
                 del k_close_distances[-1]
                 del k_close_labels[-1]
                 pos_to_insert = bisect.bisect(k_close_distances, distance_score)
                 k_close_distances.insert(pos_to_insert, distance_score)
-                k_close_labels.insert(pos_to_insert, self.train_labels[index])
+                k_close_labels.insert(pos_to_insert, self.train_labels[index + self.k])
                 max_k_score = k_close_distances[-1]
 
         return k_close_distances, k_close_labels
