@@ -1,8 +1,13 @@
 import abc
-import numpy as np
-from src.data.dataset import DataLoader
-from sklearn.metrics import accuracy_score
 from time import time
+from typing import Tuple
+
+import numpy as np
+import pandas as pd
+import sklearn.metrics as metrics
+from sklearn.metrics import accuracy_score, balanced_accuracy_score
+
+from src.data.dataset import DataLoader
 
 
 class SupervisedAlgorithm:
@@ -21,7 +26,9 @@ class SupervisedAlgorithm:
         pass
 
     def classify(self, train_loader: DataLoader, test_loader: DataLoader):
-        self.output_scores = np.zeros(train_loader.get_length())
+        self.overall_output_scores = np.zeros(train_loader.get_length())
+        self.balanced_output_scores = np.zeros(train_loader.get_length())
+        self.confusion_matrices = []
         print('Starting', train_loader.get_length(), '- fold')
         train_loader.reset()
         test_loader.reset()
@@ -39,19 +46,32 @@ class SupervisedAlgorithm:
             self.train(train_values, train_labels)
             predicted_labels = self.test(test_values)
 
-            score = self.compute_score(test_labels, predicted_labels)
-            self.output_scores[train_loader.get_index()-1] = score
+            overall_score, balanced_score = self.compute_score(test_labels, predicted_labels)
+            self.overall_output_scores[train_loader.get_index() - 1] = overall_score
+            self.balanced_output_scores[train_loader.get_index() - 1] = balanced_score
+            self.confusion_matrices.append(
+                pd.DataFrame(metrics.confusion_matrix(test_labels, predicted_labels)).transpose()
+            )
 
             train_data = train_loader.next()
             test_data = test_loader.next()
             index += 1
-            print('Step', index, 'finished in', time() - init, 'seconds. Score:', score)
+            print('Step', index, 'finished in', time() - init, 'seconds.',
+                  'Overall:', overall_score, 'Balanced score:', balanced_score)
 
-    def compute_score(self, original_labels: np.ndarray, predicted_labels: np.ndarray) -> np.float:
-        return accuracy_score(original_labels, predicted_labels)
+    def compute_score(self, original_labels: np.ndarray, predicted_labels: np.ndarray) -> Tuple[np.float, np.float]:
+        return accuracy_score(original_labels, predicted_labels), \
+               balanced_accuracy_score(original_labels, predicted_labels)
 
     def show_results(self):
-        print('Mean accuracy:', np.mean(self.output_scores))
+        print('Mean overall accuracy:', np.mean(self.overall_output_scores))
+        print('Mean balanced accuracy:', np.mean(self.balanced_output_scores))
+
+    def get_scores(self):
+        return np.mean(self.overall_output_scores), np.mean(self.balanced_output_scores)
+
+    def get_confusion_matrices(self):
+        return self.confusion_matrices
 
     # Subclass main methods
 
