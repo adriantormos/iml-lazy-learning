@@ -68,6 +68,8 @@ def main(config_path: str, output_path: str, visualize: bool, verbose: bool):
         algorithm = AlgorithmFactory.select_supervised_algorithm(algorithm_config, output_path, verbose)
         algorithm.classify(train_loader, test_loader)
         algorithm.show_results()
+        overall_score, balanced_score = algorithm.get_scores()
+        confusion_matrices = algorithm.get_confusion_matrices()
         algorithm_total_time = time() - initial_time
         print('Finished running algorithm; elapsed time:', algorithm_total_time)
 
@@ -75,7 +77,12 @@ def main(config_path: str, output_path: str, visualize: bool, verbose: bool):
     if output_path is not None:
         save_json(output_path + '/config', config)
         if 'algorithm' in config:
-            save_json(output_path + '/algorithm_total_time', algorithm_total_time)
+            save_json(output_path + '/stats', {'overall_score': overall_score,
+                                               'balanced_score': balanced_score,
+                                               'execution_time': algorithm_total_time})
+            for i, matrix in enumerate(confusion_matrices):
+                matrix.to_csv(output_path + '/confusion_matrix_' + str(i) + '.csv', index=False)
+
 
 
 if __name__ == '__main__':
