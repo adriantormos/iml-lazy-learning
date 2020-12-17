@@ -1,5 +1,4 @@
 from src.data.dataset import Dataset
-from src.data.types.kropt import KroptDataset
 from src.data.types.hypothyroid import HypothyroidDataset
 
 
@@ -11,9 +10,7 @@ class DatasetFactory:
     @staticmethod
     def select_dataset(config, verbose) -> Dataset:
         name = config['name']
-        if name == 'kropt':
-            dataset = KroptDataset(config, verbose)
-        elif name == 'hypothyroid':
+        if name == 'hypothyroid':
             dataset = HypothyroidDataset(config, verbose)
         else:
             raise Exception('The dataset with name ' + name + ' does not exist')
