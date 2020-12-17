@@ -1,5 +1,4 @@
-from collections import Counter
-
+import math
 import numpy as np
 from scipy.spatial.distance import cdist
 
@@ -93,6 +92,32 @@ def inverse_distance_weighted_voting_method(k_close_distances: list, k_close_lab
         list_index = all_labels[k_close_label]
         labels_count[list_index] += 1
         labels_weighted_score[list_index] += 1 / k_close_distances[index] if k_close_distances[index] != 0 else 1000
+        if max_weighted_score_index is None or labels_weighted_score[max_weighted_score_index] < labels_weighted_score[list_index] or max_weighted_score_index == list_index:
+            max_weighted_score_index = list_index
+            max_weighted_score_tie = [list_index]
+            max_count_index = list_index
+        elif labels_weighted_score[max_weighted_score_index] == labels_weighted_score[list_index]:
+            max_weighted_score_tie.append(list_index)
+            max_count_index = max_count_index if labels_count[max_count_index] >= labels_count[list_index] else list_index
+
+    # if not a tie, return the label with the minimum sum of weighted votes
+    if len(max_weighted_score_tie) == 1: return all_labels_inv[max_weighted_score_index]
+
+    # if a tie, return the label between the tie labels with the most apparitions, if there is also a tie in the number of apparitions, we return one of the tie labels
+    return all_labels_inv[max_count_index]
+
+
+def sheppard_voting_method(k_close_distances: list, k_close_labels: list, all_labels: dict, all_labels_inv: dict):
+    # find the labels with the less weighted score and save the majority class for the possible tie
+    labels_weighted_score = np.zeros(len(all_labels))
+    labels_count = np.zeros(len(all_labels))
+    max_weighted_score_index = None  # store the index of the labels_weighted_score array with the most apparitions
+    max_weighted_score_tie = []  # store the indexes of the labels_weighted_score array with the most apparitions, if there is only one it stores the same as the previous variable
+    max_count_index = None  # store the index of the labels_count array with the most apparitions inside the max_weighted_score_tie (the ones with the same score)
+    for index, k_close_label in enumerate(k_close_labels):
+        list_index = all_labels[k_close_label]
+        labels_count[list_index] += 1
+        labels_weighted_score[list_index] += math.exp(-k_close_distances[index])
         if max_weighted_score_index is None or labels_weighted_score[max_weighted_score_index] < labels_weighted_score[list_index] or max_weighted_score_index == list_index:
             max_weighted_score_index = list_index
             max_weighted_score_tie = [list_index]
