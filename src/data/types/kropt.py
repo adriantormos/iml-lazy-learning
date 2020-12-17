@@ -19,7 +19,7 @@ class KroptDataset(Dataset):
 
     # Main methods
 
-    def get_dataset_name(self) -> string:
+    def get_dataset_name(self) -> str:
         return self.name
 
     def preprocess_data(self, data: pd.DataFrame) -> (np.ndarray, np.ndarray):
