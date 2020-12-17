@@ -12,11 +12,10 @@ class HypothyroidDataset(Dataset):
 
     def __init__(self, config, verbose):
         self.name = 'hypothyroid'
-        self.only_numerical = config['only_numerical']
         self.class_feature = 'Class'
         self.numerical_features = ['age', 'TSH', 'T3', 'TT4', 'T4U', 'FTI', 'TBG']
         self.null_values = [b'?']
-        self.classes_to_numerical = config['classes_to_numerical']
+        self.classes_to_numerical = {"compensated_hypothyroid": 0, "negative": 1, "primary_hypothyroid": 2, "secondary_hypothyroid": 3}
         self.nominal_features = None
         self.verbose = verbose
         super(HypothyroidDataset, self).__init__(config, verbose)
@@ -31,9 +30,6 @@ class HypothyroidDataset(Dataset):
         if self.nominal_features is None:
             self.nominal_features = [name for name in data.columns if
                                      name not in self.numerical_features + [self.class_feature]]
-
-        if self.verbose:
-            print('Started data preprocessing')
 
         # Replace non orthodox nan values like ? for nan values
         for null_value in self.null_values:
@@ -72,21 +68,20 @@ class HypothyroidDataset(Dataset):
             data[feature_index] = normalized_feature
 
         # Nominal features -> replace the NaN values by the median
-        if not self.only_numerical:
-            for feature_index in self.nominal_features:
-                feature = data[feature_index]
+        for feature_index in self.nominal_features:
+            feature = data[feature_index]
 
-                # replace the NaN values by the median
-                nan_indexes = data.index[feature.isnull()].tolist()
-                feature = feature.to_numpy()
-                feature_without_nans = np.delete(feature, nan_indexes)
-                unique, counts = np.unique(feature_without_nans, return_counts=True)
-                median = unique[np.argmax(np.asarray(counts))]
-                feature[nan_indexes] = median
-                data[feature_index] = feature
+            # replace the NaN values by the median
+            nan_indexes = data.index[feature.isnull()].tolist()
+            feature = feature.to_numpy()
+            feature_without_nans = np.delete(feature, nan_indexes)
+            unique, counts = np.unique(feature_without_nans, return_counts=True)
+            median = unique[np.argmax(np.asarray(counts))]
+            feature[nan_indexes] = median
+            data[feature_index] = feature
 
-            # do hot encoding
-            data = one_hot_encoding(data, self.nominal_features)
+        # do hot encoding
+        data = one_hot_encoding(data, self.nominal_features)
 
         # Convert classes to numerical
         data[self.class_feature] = data[self.class_feature].str.decode("utf-8")
@@ -97,13 +92,7 @@ class HypothyroidDataset(Dataset):
         data = data[[c for c in data if c not in cols_at_end]
                 + [c for c in cols_at_end if c in data]]
 
-        if self.verbose:
-            print('Finished data preprocessing')
-
-        if self.only_numerical:
-            values = data[self.numerical_features].to_numpy()
-        else:
-            values = data.loc[:, data.columns != self.class_feature].to_numpy()
+        values = data.loc[:, data.columns != self.class_feature].to_numpy()
         labels = data[self.class_feature].to_numpy()
 
         return values, labels
