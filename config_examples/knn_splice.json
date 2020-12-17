@@ -1,9 +1,7 @@
 {
   "data": {
-    "name": "kropt",
-    "balance": 0,
-    "encoding": "one_hot_encoding"
-  },
+		"name": "splice"
+	},
   "algorithm": {
     "name": "knn",
     "k": 5,
