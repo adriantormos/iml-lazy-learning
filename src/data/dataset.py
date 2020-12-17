@@ -47,8 +47,7 @@ class Dataset(metaclass=abc.ABCMeta):
 
     def __init__(self, config, verbose):
         k_fold_train_datasets, k_fold_test_datasets = self.load_k_fold_datasets()
-        train_values_preprocessed, train_labels_preprocessed = self.preprocess_k_fold_datasets(k_fold_train_datasets)
-        test_values_preprocessed, test_labels_preprocessed = self.preprocess_k_fold_datasets(k_fold_test_datasets)
+        train_values_preprocessed, train_labels_preprocessed, test_values_preprocessed, test_labels_preprocessed = self.preprocess_k_fold_datasets(k_fold_train_datasets, k_fold_test_datasets)
         self.train_loader = DataLoader(train_values_preprocessed, train_labels_preprocessed)
         self.test_loader = DataLoader(test_values_preprocessed, test_labels_preprocessed)
 
@@ -74,15 +73,32 @@ class Dataset(metaclass=abc.ABCMeta):
                 test_datasets.append(pd.DataFrame(data))
         return train_datasets, test_datasets
 
-    def preprocess_k_fold_datasets(self, datasets) -> (np.ndarray, np.ndarray):
-        output_values = []
-        output_labels = []
-        for dataset in datasets:
-            values, labels = self.preprocess_data(dataset)
-            shuffle_in_unison(values, labels)
-            output_values.append(values)
-            output_labels.append(labels)
-        return output_values, output_labels
+    def preprocess_k_fold_datasets(self, train_datasets, test_datasets) -> (np.ndarray, np.ndarray):
+        output_train_values = []
+        output_train_labels = []
+        output_test_values = []
+        output_test_labels = []
+
+        for index, train_dataset in enumerate(train_datasets):
+
+            test_dataset = test_datasets[index]
+            full_dataset = train_dataset.append(test_dataset, ignore_index=True)
+            full_values, full_labels = self.preprocess_data(full_dataset)
+
+            train_values = full_values[:len(train_dataset.index)]
+            test_values = full_values[len(train_dataset.index):]
+            train_labels = full_labels[:len(train_dataset.index)]
+            test_labels = full_labels[len(train_dataset.index):]
+
+            shuffle_in_unison(train_values, train_labels)
+            shuffle_in_unison(test_values, test_labels)
+
+            output_train_values.append(train_values)
+            output_test_values.append(test_values)
+            output_train_labels.append(train_labels)
+            output_test_labels.append(test_labels)
+
+        return output_train_values, output_train_labels, output_test_values, output_test_labels
 
     # Subclass main methods
 
