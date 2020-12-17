@@ -51,7 +51,6 @@ class KNNAlgorithm(SupervisedAlgorithm):
 
     def find_k_close_values(self, test_value: np.ndarray) -> (list, list):
         # pre: self.train_values.shape[0] > k
-
         distances_to_test_value = cdist(np.array([test_value]), self.train_values, self.distance_metric)[0]
         sorted_args = distances_to_test_value.argsort()[:self.k]
         return distances_to_test_value[sorted_args], self.train_labels[sorted_args]

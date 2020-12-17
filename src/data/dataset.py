@@ -64,7 +64,9 @@ class Dataset(metaclass=abc.ABCMeta):
         train_datasets = []
         test_datasets = []
         directory = '../datasets/' + dataset_name
-        for filename in os.listdir(directory):
+        filenames = [filename for filename in os.listdir(directory)]
+        filenames.sort()
+        for filename in filenames:
             if filename.endswith('train.arff'):
                 data, _ = loadarff(os.path.join(directory, filename))
                 train_datasets.append(pd.DataFrame(data))
