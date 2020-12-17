@@ -3,6 +3,7 @@ from src.auxiliary.preprocessing_methods import min_max_normalize, one_hot_encod
 import numpy as np
 import pandas as pd
 import warnings
+warnings.simplefilter(action='ignore', category=FutureWarning)
 
 
 class HypothyroidDataset(Dataset):
