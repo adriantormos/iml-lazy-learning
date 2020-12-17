@@ -91,5 +91,3 @@ class KroptDataset(Dataset):
         labels = data['game'].to_numpy()
 
         return values, labels
-
-    # Auxiliary methods

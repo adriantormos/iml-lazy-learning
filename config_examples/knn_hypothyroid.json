@@ -1,0 +1,16 @@
+{
+  "data": {
+		"name": "hypothyroid",
+		"classes_to_numerical": {"compensated_hypothyroid": 0, "negative": 1, "primary_hypothyroid": 2, "secondary_hypothyroid": 3},
+		"only_numerical": 1
+	},
+  "algorithm": {
+    "name": "knn",
+    "k": 5,
+    "distance_metric": "euclidean",
+    "voting": "majority",
+    "weighting": "equal"
+  },
+  "charts": [],
+  "manual_seed": 0
+}
