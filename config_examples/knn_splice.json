@@ -6,8 +6,8 @@
     "name": "knn",
     "k": 5,
     "distance_metric": "euclidean",
-    "voting": "majority",
-    "weighting": "equal"
+    "voting": "sheppard",
+    "weighting": {"name": "equal"}
   },
   "charts": [],
   "manual_seed": 0

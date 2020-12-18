@@ -4,6 +4,7 @@ import numpy as np
 from scipy.spatial.distance import cdist
 
 from src.algorithms.supervised_algorithm import SupervisedAlgorithm
+from src.algorithms.types.relieff import ReliefF
 
 
 class KNNAlgorithm(SupervisedAlgorithm):
@@ -24,10 +25,10 @@ class KNNAlgorithm(SupervisedAlgorithm):
             self.voting = eval(config['voting'] + '_voting_method')
         except:
             raise Exception('The chosen voting method does not exist')
-        try:
-            self.weighting = eval(config['weighting'] + '_weighting_method')
-        except:
-            raise Exception('The chosen weighting method does not exist')
+        if config['weighting']['name'] == 'weighted_relieff':
+            self.feature_selection = ReliefF(config['weighting'])
+        else:
+            self.feature_selection = None
 
     def train(self, values: np.ndarray, labels: np.ndarray):
         print('    Train shape:', values.shape)
@@ -35,9 +36,15 @@ class KNNAlgorithm(SupervisedAlgorithm):
             raise Exception('The number of samples of the training set is inferior to the k parameter')
         self.train_values = values
         self.train_labels = labels
+
+        # auxiliary attributes for making easier the voting methods
         all_labels = np.unique(labels)
         self.all_labels = {label:index for index, label in enumerate(all_labels)}
         self.all_labels_inv = {index: label for index, label in enumerate(all_labels)}
+
+        # feature weighting
+        if self.feature_selection is not None:
+            self.feature_weights = self.feature_selection.run(values, labels)
 
     def test(self, test_values: np.ndarray) -> np.ndarray:
         predicted_labels = np.zeros(test_values.shape[0])
@@ -51,7 +58,10 @@ class KNNAlgorithm(SupervisedAlgorithm):
 
     def find_k_close_values(self, test_value: np.ndarray) -> (list, list):
         # pre: self.train_values.shape[0] > k
-        distances_to_test_value = cdist(np.array([test_value]), self.train_values, self.distance_metric)[0]
+        if self.feature_selection is not None:
+            distances_to_test_value = cdist(np.expand_dims(test_value*self.feature_weights, axis=0), self.train_values*self.feature_weights, self.distance_metric)[0]
+        else:
+            distances_to_test_value = cdist(np.expand_dims(test_value, axis=0), self.train_values, self.distance_metric)[0]
         sorted_args = distances_to_test_value.argsort()[:self.k]
         return distances_to_test_value[sorted_args], self.train_labels[sorted_args]
 
