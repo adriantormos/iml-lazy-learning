@@ -1,5 +1,6 @@
 from src.data.dataset import Dataset
 from src.data.types.hypothyroid import HypothyroidDataset
+from src.data.types.sick import SickDataset
 
 
 class DatasetFactory:
@@ -12,6 +13,8 @@ class DatasetFactory:
         name = config['name']
         if name == 'hypothyroid':
             dataset = HypothyroidDataset(config, verbose)
+        elif name == 'sick':
+            dataset = SickDataset(config, verbose)
         else:
             raise Exception('The dataset with name ' + name + ' does not exist')
         if issubclass(type(dataset), Dataset):
