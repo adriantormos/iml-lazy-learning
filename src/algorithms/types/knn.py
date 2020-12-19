@@ -31,7 +31,8 @@ class KNNAlgorithm(SupervisedAlgorithm):
             self.feature_selection = None
 
     def train(self, values: np.ndarray, labels: np.ndarray):
-        print('    Train shape:', values.shape)
+        if self.verbose:
+            print('    Train shape:', values.shape)
         if values.shape[0] < self.k:
             raise Exception('The number of samples of the training set is inferior to the k parameter')
         self.train_values = values
@@ -48,7 +49,8 @@ class KNNAlgorithm(SupervisedAlgorithm):
 
     def test(self, test_values: np.ndarray) -> np.ndarray:
         predicted_labels = np.zeros(test_values.shape[0])
-        print('    Test shape:', test_values.shape)
+        if self.verbose:
+            print('    Test shape:', test_values.shape)
         for index, test_value in enumerate(test_values):
             k_close_distances, k_close_labels = self.find_k_close_values(test_value)
             predicted_labels[index] = self.voting(k_close_distances, k_close_labels, self.all_labels, self.all_labels_inv)
