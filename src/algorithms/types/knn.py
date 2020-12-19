@@ -62,7 +62,12 @@ class KNNAlgorithm(SupervisedAlgorithm):
             distances_to_test_value = cdist(np.expand_dims(test_value*self.feature_weights, axis=0), self.train_values*self.feature_weights, self.distance_metric)[0]
         else:
             distances_to_test_value = cdist(np.expand_dims(test_value, axis=0), self.train_values, self.distance_metric)[0]
-        sorted_args = distances_to_test_value.argsort()[:self.k]
+
+        if self.k == 1:
+            sorted_args = [distances_to_test_value.argmin()]
+        else:
+            sorted_args = distances_to_test_value.argsort()[:self.k]
+
         return distances_to_test_value[sorted_args], self.train_labels[sorted_args]
 
 
