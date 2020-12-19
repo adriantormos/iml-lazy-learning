@@ -19,14 +19,6 @@ class ModifiedEditedKNNAlgorithm(SupervisedAlgorithm):
                 self.distance_metric = 'cityblock'
         except KeyError:
             raise Exception('The chosen distance metric does not exist')
-        # try:
-        #     self.voting = eval(config['voting'] + '_voting_method')
-        # except:
-        #     raise Exception('The chosen voting method does not exist')
-        # try:
-        #     self.weighting = eval(config['weighting'] + '_weighting_method')
-        # except:
-        #     raise Exception('The chosen weighting method does not exist')
 
     def train(self, values: np.ndarray, labels: np.ndarray):
         if self.verbose:
