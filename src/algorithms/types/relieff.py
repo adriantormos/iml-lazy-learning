@@ -50,4 +50,7 @@ class ReliefF:
                         total_found += 1
                 index += 1
 
+        # normalize the feature weights to use them in the knn algorithm
+        feature_weights = (feature_weights - np.min(feature_weights))/np.ptp(feature_weights)
+
         return feature_weights

@@ -7,7 +7,7 @@
     "k": 5,
     "distance_metric": "euclidean",
     "voting": "majority",
-    "weighting": {"name": "equal"}
+    "weighting": {"name": "weighted_relieff", "n_iterations": 5, "nearest_values": 10, "distance_metric": "euclidean"}
   },
   "charts": [],
   "manual_seed": 0
