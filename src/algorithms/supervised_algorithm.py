@@ -22,7 +22,7 @@ class SupervisedAlgorithm:
     # Abstract class main methods
 
     def __init__(self, config, output_path, verbose):
-        pass
+        self.verbose = verbose
 
     def classify(self, train_loader: DataLoader, test_loader: DataLoader):
         self.overall_output_scores = np.zeros(train_loader.get_length())
