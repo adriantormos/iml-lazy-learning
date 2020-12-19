@@ -69,6 +69,7 @@ def main(config_path: str, output_path: str, visualize: bool, verbose: bool):
         algorithm.show_results()
         overall_score, balanced_score, all_scores, all_balanced_scores = algorithm.get_scores()
         confusion_matrices = algorithm.get_confusion_matrices()
+        total_train_time, total_test_time = algorithm.get_times()
         algorithm_total_time = time() - initial_time
         print('Finished running algorithm; elapsed time:', algorithm_total_time)
 
@@ -80,7 +81,9 @@ def main(config_path: str, output_path: str, visualize: bool, verbose: bool):
                                                'balanced_score': balanced_score,
                                                'all_scores': list(all_scores),
                                                'all_balanced_scores': list(all_balanced_scores),
-                                               'execution_time': algorithm_total_time})
+                                               'execution_time': algorithm_total_time,
+                                               'train_execution_time': total_train_time,
+                                               'test_execution_time': total_test_time})
             for i, matrix in enumerate(confusion_matrices):
                 matrix.to_csv(output_path + '/confusion_matrix_' + str(i) + '.csv', index=False)
 
