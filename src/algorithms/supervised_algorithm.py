@@ -67,7 +67,7 @@ class SupervisedAlgorithm:
         print('Mean balanced accuracy:', np.mean(self.balanced_output_scores))
 
     def get_scores(self):
-        return np.mean(self.overall_output_scores), np.mean(self.balanced_output_scores)
+        return np.mean(self.overall_output_scores), np.mean(self.balanced_output_scores), self.overall_output_scores, self.balanced_output_scores
 
     def get_confusion_matrices(self):
         return self.confusion_matrices
