@@ -1,5 +1,6 @@
 from src.algorithms.supervised_algorithm import SupervisedAlgorithm
 from src.algorithms.types.knn import KNNAlgorithm
+from src.algorithms.types.mcnn import ModifiedCondensedKNNAlgorithm
 from src.algorithms.types.menn import ModifiedEditedKNNAlgorithm
 
 
@@ -13,6 +14,8 @@ class AlgorithmFactory:
         name = config['name']
         if name == 'knn':
             algorithm = KNNAlgorithm(config, output_path, verbose)
+        elif name == 'mcnn':
+            algorithm = ModifiedCondensedKNNAlgorithm(config, output_path, verbose)
         elif name == 'menn':
             algorithm = ModifiedEditedKNNAlgorithm(config, output_path, verbose)
         else:
