@@ -1,0 +1,15 @@
+{
+  "data": {
+    "name": "sick"
+  },
+  "algorithm": {
+    "name": "knn",
+    "k": 5,
+    "distance_metric": "cityblock",
+    "voting": "majority",
+    "weighting": {
+      "name": "equal"
+    }
+  },
+  "manual_seed": 0
+}

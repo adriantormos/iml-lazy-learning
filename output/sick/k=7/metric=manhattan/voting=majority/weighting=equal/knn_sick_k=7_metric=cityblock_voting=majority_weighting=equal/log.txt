@@ -1,0 +1,68 @@
+Preparing data
+     Total number of NaNs:  5914 ; relative:  5.226228349240015 %
+     Deleted because of too many NaN values the features with name: ['TBG']
+     Total number of NaNs:  5914 ; relative:  5.226228349240015 %
+     Deleted because of too many NaN values the features with name: ['TBG']
+     Total number of NaNs:  5914 ; relative:  5.226228349240015 %
+     Deleted because of too many NaN values the features with name: ['TBG']
+     Total number of NaNs:  5914 ; relative:  5.226228349240015 %
+     Deleted because of too many NaN values the features with name: ['TBG']
+     Total number of NaNs:  5914 ; relative:  5.226228349240015 %
+     Deleted because of too many NaN values the features with name: ['TBG']
+     Total number of NaNs:  5914 ; relative:  5.226228349240015 %
+     Deleted because of too many NaN values the features with name: ['TBG']
+     Total number of NaNs:  5914 ; relative:  5.226228349240015 %
+     Deleted because of too many NaN values the features with name: ['TBG']
+     Total number of NaNs:  5914 ; relative:  5.226228349240015 %
+     Deleted because of too many NaN values the features with name: ['TBG']
+     Total number of NaNs:  5914 ; relative:  5.226228349240015 %
+     Deleted because of too many NaN values the features with name: ['TBG']
+     Total number of NaNs:  5914 ; relative:  5.226228349240015 %
+     Deleted because of too many NaN values the features with name: ['TBG']
+Finished preparing data; elapsed time: 2.270690441131592
+
+Running algorithm
+Starting 10 - fold
+Doing step 0
+    Train shape: (3396, 52)
+    Test shape: (376, 52)
+Step 1 finished in 0.15989971160888672 seconds. Overall: 0.9601063829787234 Balanced score: 0.7145584431580244
+Doing step 1
+    Train shape: (3395, 52)
+    Test shape: (377, 52)
+Step 2 finished in 0.15916180610656738 seconds. Overall: 0.9628647214854111 Balanced score: 0.7566322770817981
+Doing step 2
+    Train shape: (3395, 52)
+    Test shape: (377, 52)
+Step 3 finished in 0.16829466819763184 seconds. Overall: 0.9734748010610079 Balanced score: 0.8029353967084254
+Doing step 3
+    Train shape: (3395, 52)
+    Test shape: (377, 52)
+Step 4 finished in 0.16048431396484375 seconds. Overall: 0.9575596816976127 Balanced score: 0.7131540162122328
+Doing step 4
+    Train shape: (3395, 52)
+    Test shape: (377, 52)
+Step 5 finished in 0.15751886367797852 seconds. Overall: 0.9602122015915119 Balanced score: 0.726333805476865
+Doing step 5
+    Train shape: (3394, 52)
+    Test shape: (378, 52)
+Step 6 finished in 0.16307330131530762 seconds. Overall: 0.9576719576719577 Balanced score: 0.6521739130434783
+Doing step 6
+    Train shape: (3393, 52)
+    Test shape: (379, 52)
+Step 7 finished in 0.1553812026977539 seconds. Overall: 0.9630606860158312 Balanced score: 0.6956521739130435
+Doing step 7
+    Train shape: (3395, 52)
+    Test shape: (377, 52)
+Step 8 finished in 0.15547823905944824 seconds. Overall: 0.9549071618037135 Balanced score: 0.6304347826086957
+Doing step 8
+    Train shape: (3395, 52)
+    Test shape: (377, 52)
+Step 9 finished in 0.15674638748168945 seconds. Overall: 0.9708222811671088 Balanced score: 0.7811962662736428
+Doing step 9
+    Train shape: (3395, 52)
+    Test shape: (377, 52)
+Step 10 finished in 0.16647028923034668 seconds. Overall: 0.9761273209549072 Balanced score: 0.8246745271432081
+Mean overall accuracy: 0.9636807196427786
+Mean balanced accuracy: 0.7297745601619414
+Finished running algorithm; elapsed time: 1.602785587310791

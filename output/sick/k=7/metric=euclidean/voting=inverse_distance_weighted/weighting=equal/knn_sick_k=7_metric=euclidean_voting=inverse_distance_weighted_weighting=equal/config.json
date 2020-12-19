@@ -1,0 +1,15 @@
+{
+  "data": {
+    "name": "sick"
+  },
+  "algorithm": {
+    "name": "knn",
+    "k": 7,
+    "distance_metric": "euclidean",
+    "voting": "inverse_distance_weighted",
+    "weighting": {
+      "name": "equal"
+    }
+  },
+  "manual_seed": 0
+}

@@ -1,0 +1,15 @@
+{
+  "data": {
+    "name": "hypothyroid"
+  },
+  "algorithm": {
+    "name": "knn",
+    "k": 7,
+    "distance_metric": "euclidean",
+    "voting": "sheppard",
+    "weighting": {
+      "name": "equal"
+    }
+  },
+  "manual_seed": 0
+}
