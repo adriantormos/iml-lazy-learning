@@ -9,6 +9,5 @@
     "voting": "majority",
     "weighting": {"name": "equal"}
   },
-  "charts": [],
   "manual_seed": 0
 }

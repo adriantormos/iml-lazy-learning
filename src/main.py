@@ -37,7 +37,6 @@ def main(config_path: str, output_path: str, visualize: bool, verbose: bool):
     # Load configuration
     config = load_json(config_path)
     data_config = config['data']
-    charts_config = config['charts']
 
     # Set up
     random.seed(config['manual_seed'])
