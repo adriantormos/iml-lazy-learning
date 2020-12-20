@@ -122,7 +122,22 @@ class ModifiedCondensedKNNAlgorithm(SupervisedAlgorithm):
                 print('', str(np.shape(_misclassified_samples)[0]) + '/' + str(np.shape(values)[0]),
                       'misclassified samples')
 
+        if self.verbose:
+            print('   ', 'Deleteing unused prototypes')
+        used_instances = []
         self.knn.train(_prototype_list, _prototype_labels)
+        for instance in values:
+            # k is always 1
+            _, _, used_instance = self.knn.find_k_close_values_with_position(instance)
+            used_instances.extend(list(used_instance))
+        used_instances = np.array(np.unique(used_instances))
+        _prototype_list = _prototype_list[used_instances]
+        _prototype_labels = _prototype_labels[used_instances]
+
+        if self.verbose:
+            print('   ', 'Final training set size:', _prototype_list.shape[0])
+        self.knn.train(_prototype_list, _prototype_labels)
+
 
     def test(self, test_values: np.ndarray) -> np.ndarray:
         return self.knn.test(test_values)
