@@ -40,6 +40,8 @@ class ModifiedEditedKNNAlgorithm(SupervisedAlgorithm):
                 typical_labels.append(candidate_label)
 
         self.knn.train(np.array(typical_samples), np.array(typical_labels))
+        if self.verbose:
+            print('   ', 'Final training set size:', np.array(typical_samples).shape[0])
 
     def test(self, test_values: np.ndarray) -> np.ndarray:
         return self.knn.test(test_values)
