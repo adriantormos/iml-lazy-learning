@@ -64,7 +64,7 @@ class ModifiedCondensedKNNAlgorithm(SupervisedAlgorithm):
                 this_iteration_prototypes_labels = np.array(this_iteration_prototypes_labels)
 
                 # Test prototypes
-                knn.train(this_iteration_prototypes, this_iteration_prototypes_labels)
+                knn.train(this_iteration_prototypes, this_iteration_prototypes_labels, False)
                 knn_returned_labels = knn.test(well_classified_samples)
 
                 # Filter well classified samples (compute new S_t)
