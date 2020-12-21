@@ -28,7 +28,7 @@ class DROP3KNNAlgorithm(SupervisedAlgorithm):
         except KeyError:
             raise Exception('The chosen distance metric does not exist')
 
-    def train(self, values: np.ndarray, labels: np.ndarray):
+    def train(self, values: np.ndarray, labels: np.ndarray, _):
         if self.verbose:
             print('    Train shape:', values.shape)
         if values.shape[0] < self.k:
@@ -48,7 +48,7 @@ class DROP3KNNAlgorithm(SupervisedAlgorithm):
         if self.verbose:
             print('   ', 'Obtaining initial nearest neighbors for', values.shape[0], 'samples')
 
-        self.knn.train(values, labels)
+        self.knn.train(values, labels, False)
         # For x_i in S
         for i, instance in enumerate(values):
             # Find nearest neighbors of x_i, ordered by distance in ascending order
@@ -144,7 +144,7 @@ class DROP3KNNAlgorithm(SupervisedAlgorithm):
                     for associated_sample in associated_samples[original_position]:
                         unzipped_definitive_samples, _ = list(zip(*definitive_samples))
                         unzipped_definitive_labels, _ = list(zip(*definitive_labels))
-                        self.knn.train(np.array(unzipped_definitive_samples), np.array(unzipped_definitive_labels))
+                        self.knn.train(np.array(unzipped_definitive_samples), np.array(unzipped_definitive_labels), False)
                         # Find again the k+1 nearest neighbors of a_j, now without x_i
                         neighbors_distances, neighbors_labels, neighbors_pos = self.knn.find_k_close_values_with_position(
                             values[associated_sample]
@@ -167,7 +167,7 @@ class DROP3KNNAlgorithm(SupervisedAlgorithm):
         unzipped_definitive_labels = np.array(unzipped_definitive_labels)
         if self.verbose:
             print('   ', 'Final training set size:', unzipped_definitive_samples.shape[0])
-        self.knn.train(unzipped_definitive_samples, unzipped_definitive_labels)
+        self.knn.train(unzipped_definitive_samples, unzipped_definitive_labels, True)
 
     def test(self, test_values: np.ndarray) -> np.ndarray:
         return self.knn.test(test_values)

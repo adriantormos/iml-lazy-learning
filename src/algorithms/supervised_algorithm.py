@@ -47,7 +47,7 @@ class SupervisedAlgorithm:
             test_values, test_labels = test_data
 
             init_train_time = time()
-            self.train(train_values, train_labels)
+            self.train(train_values, train_labels, True)
             self.total_train_time += time() - init_train_time
             init_test_time = time()
             predicted_labels = self.test(test_values)
@@ -86,7 +86,7 @@ class SupervisedAlgorithm:
     # Subclass main methods
 
     @abc.abstractmethod
-    def train(self, values: np.ndarray, labels: np.ndarray):
+    def train(self, values: np.ndarray, labels: np.ndarray, definitive: bool):
         raise NotImplementedError('Method not implemented in abstract class')
 
     @abc.abstractmethod

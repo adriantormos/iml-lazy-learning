@@ -29,7 +29,7 @@ class ModifiedCondensedKNNAlgorithm(SupervisedAlgorithm):
         # except:
         #     raise Exception('The chosen weighting method does not exist')
 
-    def train(self, values: np.ndarray, labels: np.ndarray):
+    def train(self, values: np.ndarray, labels: np.ndarray, _):
 
         def _generate_prototypes(misclassified_samples, misclassified_labels, knn):
             prototype_list = np.empty(shape=(0, values.shape[1]))
@@ -108,7 +108,7 @@ class ModifiedCondensedKNNAlgorithm(SupervisedAlgorithm):
                 print('   ', 'Test using',
                       np.shape(_prototype_list)[0], 'prototypes on all testing set:', end='')
 
-            self.knn.train(_prototype_list, _prototype_labels)
+            self.knn.train(_prototype_list, _prototype_labels, False)
             _knn_returned_labels = self.knn.test(values)
 
             _classification_index = _knn_returned_labels != labels
@@ -125,7 +125,7 @@ class ModifiedCondensedKNNAlgorithm(SupervisedAlgorithm):
         if self.verbose:
             print('   ', 'Deleteing unused prototypes')
         used_instances = []
-        self.knn.train(_prototype_list, _prototype_labels)
+        self.knn.train(_prototype_list, _prototype_labels, False)
         for instance in values:
             # k is always 1
             _, _, used_instance = self.knn.find_k_close_values_with_position(instance)
@@ -136,7 +136,7 @@ class ModifiedCondensedKNNAlgorithm(SupervisedAlgorithm):
 
         if self.verbose:
             print('   ', 'Final training set size:', _prototype_list.shape[0])
-        self.knn.train(_prototype_list, _prototype_labels)
+        self.knn.train(_prototype_list, _prototype_labels, True)
 
     def test(self, test_values: np.ndarray) -> np.ndarray:
         self.knn.k = self.k

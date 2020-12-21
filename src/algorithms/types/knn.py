@@ -30,7 +30,8 @@ class KNNAlgorithm(SupervisedAlgorithm):
         else:
             self.feature_selection = None
 
-    def train(self, values: np.ndarray, labels: np.ndarray):
+    def train(self, values: np.ndarray, labels: np.ndarray, definitive: bool):
+        self.definitive = definitive
         if self.verbose:
             print('    Train shape:', values.shape)
         if values.shape[0] < self.k:
@@ -43,9 +44,10 @@ class KNNAlgorithm(SupervisedAlgorithm):
         self.all_labels = {label:index for index, label in enumerate(all_labels)}
         self.all_labels_inv = {index: label for index, label in enumerate(all_labels)}
 
-        # feature weighting
-        if self.feature_selection is not None:
-            self.feature_weights = self.feature_selection.run(values, labels)
+        if definitive:
+            # feature weighting
+            if self.feature_selection is not None:
+                self.feature_weights = self.feature_selection.run(values, labels)
 
     def test(self, test_values: np.ndarray) -> np.ndarray:
         predicted_labels = np.zeros(test_values.shape[0])
@@ -60,7 +62,7 @@ class KNNAlgorithm(SupervisedAlgorithm):
 
     def find_k_close_values(self, test_value: np.ndarray) -> (list, list):
         # pre: self.train_values.shape[0] > k
-        if self.feature_selection is not None:
+        if self.feature_selection is not None and self.definitive:
             distances_to_test_value = cdist(np.expand_dims(test_value*self.feature_weights, axis=0), self.train_values*self.feature_weights, self.distance_metric)[0]
         else:
             distances_to_test_value = cdist(np.expand_dims(test_value, axis=0), self.train_values, self.distance_metric)[0]
@@ -74,7 +76,7 @@ class KNNAlgorithm(SupervisedAlgorithm):
 
     def find_k_close_values_with_position(self, test_value: np.ndarray) -> (list, list):
         # pre: self.train_values.shape[0] > k
-        if self.feature_selection is not None:
+        if self.feature_selection is not None and self.definitive:
             distances_to_test_value = cdist(np.expand_dims(test_value*self.feature_weights, axis=0), self.train_values*self.feature_weights, self.distance_metric)[0]
         else:
             distances_to_test_value = cdist(np.expand_dims(test_value, axis=0), self.train_values, self.distance_metric)[0]
@@ -114,7 +116,7 @@ def majority_voting_method(k_close_distances: list, k_close_labels: list, all_la
 
 
 def inverse_distance_weighted_voting_method(k_close_distances: list, k_close_labels: list, all_labels: dict, all_labels_inv: dict):
-    # find the labels with the less weighted score
+    # find the class with the higher weighted score
     labels_weighted_score = np.zeros(len(all_labels))
     max_weighted_score_index = None  # store the index of the labels inside the labels_weighted_score array with the highest weighted score
     max_weighted_score_tie = []  # store the indexes of the labels inside the labels_weighted_score array with the highest weighted scores, if there is only one it stores the same as the previous variable
@@ -127,7 +129,7 @@ def inverse_distance_weighted_voting_method(k_close_distances: list, k_close_lab
         elif labels_weighted_score[max_weighted_score_index] == labels_weighted_score[list_index]:
             max_weighted_score_tie.append(list_index)
 
-    # if not a tie, return the label with the minimum sum of weighted votes
+    # if not a tie, return the label with the maximum sum of weighted votes
     if len(max_weighted_score_tie) == 1: return all_labels_inv[max_weighted_score_index]
 
     # if a tie, return a random label between the tie labels
@@ -135,7 +137,7 @@ def inverse_distance_weighted_voting_method(k_close_distances: list, k_close_lab
 
 
 def sheppard_voting_method(k_close_distances: list, k_close_labels: list, all_labels: dict, all_labels_inv: dict):
-    # find the labels with the less weighted score
+    # find the label with the higher weighted score
     labels_weighted_score = np.zeros(len(all_labels))
     max_weighted_score_index = None  # store the index of the labels inside the labels_weighted_score array with the highest weighted score
     max_weighted_score_tie = []  # store the indexes of the labels inside the labels_weighted_score array with the highest weighted scores, if there is only one it stores the same as the previous variable
@@ -148,7 +150,7 @@ def sheppard_voting_method(k_close_distances: list, k_close_labels: list, all_la
         elif labels_weighted_score[max_weighted_score_index] == labels_weighted_score[list_index]:
             max_weighted_score_tie.append(list_index)
 
-    # if not a tie, return the label with the minimum sum of weighted votes
+    # if not a tie, return the label with the maximum sum of weighted votes
     if len(max_weighted_score_tie) == 1: return all_labels_inv[max_weighted_score_index]
 
     # if a tie, return a random label between the tie labels

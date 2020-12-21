@@ -20,7 +20,7 @@ class ModifiedEditedKNNAlgorithm(SupervisedAlgorithm):
         except KeyError:
             raise Exception('The chosen distance metric does not exist')
 
-    def train(self, values: np.ndarray, labels: np.ndarray):
+    def train(self, values: np.ndarray, labels: np.ndarray, _):
         if self.verbose:
             print('    Train shape:', values.shape)
         if values.shape[0] < self.k:
@@ -39,7 +39,7 @@ class ModifiedEditedKNNAlgorithm(SupervisedAlgorithm):
                 typical_samples.append(candidate_value)
                 typical_labels.append(candidate_label)
 
-        self.knn.train(np.array(typical_samples), np.array(typical_labels))
+        self.knn.train(np.array(typical_samples), np.array(typical_labels), True)
         if self.verbose:
             print('   ', 'Final training set size:', np.array(typical_samples).shape[0])
 
