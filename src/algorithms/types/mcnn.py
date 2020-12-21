@@ -138,7 +138,7 @@ class ModifiedCondensedKNNAlgorithm(SupervisedAlgorithm):
             print('   ', 'Final training set size:', _prototype_list.shape[0])
         self.knn.train(_prototype_list, _prototype_labels)
 
-
     def test(self, test_values: np.ndarray) -> np.ndarray:
+        self.knn.k = self.k
         return self.knn.test(test_values)
 
