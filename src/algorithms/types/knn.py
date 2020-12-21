@@ -72,6 +72,20 @@ class KNNAlgorithm(SupervisedAlgorithm):
 
         return distances_to_test_value[sorted_args], self.train_labels[sorted_args]
 
+    def find_k_close_values_with_position(self, test_value: np.ndarray) -> (list, list):
+        # pre: self.train_values.shape[0] > k
+        if self.feature_selection is not None:
+            distances_to_test_value = cdist(np.expand_dims(test_value*self.feature_weights, axis=0), self.train_values*self.feature_weights, self.distance_metric)[0]
+        else:
+            distances_to_test_value = cdist(np.expand_dims(test_value, axis=0), self.train_values, self.distance_metric)[0]
+
+        if self.k == 1:
+            sorted_args = [distances_to_test_value.argmin()]
+        else:
+            sorted_args = distances_to_test_value.argsort()[:self.k]
+
+        return distances_to_test_value[sorted_args], self.train_labels[sorted_args], sorted_args
+
 
 def majority_voting_method(k_close_distances: list, k_close_labels: list, all_labels: dict, all_labels_inv: dict):
     # find the labels with the most apparitions and save their average sum of distances for the possible tie

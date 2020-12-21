@@ -2,6 +2,7 @@ from src.algorithms.supervised_algorithm import SupervisedAlgorithm
 from src.algorithms.types.knn import KNNAlgorithm
 from src.algorithms.types.mcnn import ModifiedCondensedKNNAlgorithm
 from src.algorithms.types.menn import ModifiedEditedKNNAlgorithm
+from src.algorithms.types.drop3 import DROP3KNNAlgorithm
 
 
 class AlgorithmFactory:
@@ -18,6 +19,8 @@ class AlgorithmFactory:
             algorithm = ModifiedCondensedKNNAlgorithm(config, output_path, verbose)
         elif name == 'menn':
             algorithm = ModifiedEditedKNNAlgorithm(config, output_path, verbose)
+        elif name == 'drop3':
+            algorithm = DROP3KNNAlgorithm(config, output_path, verbose)
         else:
             raise Exception('The supervised algorithm with name ' + name + ' does not exist')
         if issubclass(type(algorithm), SupervisedAlgorithm):
