@@ -50,9 +50,9 @@ class ModifiedEditedKNNAlgorithm(SupervisedAlgorithm):
         # pre: self.train_values.shape[0] > k
         distances_to_test_value = cdist(np.array([point]), values, self.distance_metric)[0]
 
-        k = self.k
+        k = self.k+1
         sorted_distances = distances_to_test_value.argsort()
         while distances_to_test_value[sorted_distances[k]] == distances_to_test_value[sorted_distances[k+1]]:
             k += 1
 
-        return values[sorted_distances[:k]], labels[sorted_distances[:k]]
+        return values[sorted_distances[1:k]], labels[sorted_distances[1:k]]
