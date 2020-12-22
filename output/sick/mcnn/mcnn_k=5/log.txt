@@ -1,0 +1,186 @@
+Preparing data
+     Total number of NaNs:  5914 ; relative:  5.226228349240015 %
+     Deleted because of too many NaN values the features with name: ['TBG']
+     Total number of NaNs:  5914 ; relative:  5.226228349240015 %
+     Deleted because of too many NaN values the features with name: ['TBG']
+     Total number of NaNs:  5914 ; relative:  5.226228349240015 %
+     Deleted because of too many NaN values the features with name: ['TBG']
+     Total number of NaNs:  5914 ; relative:  5.226228349240015 %
+     Deleted because of too many NaN values the features with name: ['TBG']
+     Total number of NaNs:  5914 ; relative:  5.226228349240015 %
+     Deleted because of too many NaN values the features with name: ['TBG']
+     Total number of NaNs:  5914 ; relative:  5.226228349240015 %
+     Deleted because of too many NaN values the features with name: ['TBG']
+     Total number of NaNs:  5914 ; relative:  5.226228349240015 %
+     Deleted because of too many NaN values the features with name: ['TBG']
+     Total number of NaNs:  5914 ; relative:  5.226228349240015 %
+     Deleted because of too many NaN values the features with name: ['TBG']
+     Total number of NaNs:  5914 ; relative:  5.226228349240015 %
+     Deleted because of too many NaN values the features with name: ['TBG']
+     Total number of NaNs:  5914 ; relative:  5.226228349240015 %
+     Deleted because of too many NaN values the features with name: ['TBG']
+Finished preparing data; elapsed time: 3.3317031860351562
+
+Running algorithm
+Starting 10 - fold
+Doing step 0
+    Train shape: (3396, 52)
+    Test using 2 prototypes on all testing set: 811/3396 misclassified samples
+    Test using 4 prototypes on all testing set: 333/3396 misclassified samples
+    Test using 8 prototypes on all testing set: 337/3396 misclassified samples
+    Test using 10 prototypes on all testing set: 308/3396 misclassified samples
+    Test using 13 prototypes on all testing set: 652/3396 misclassified samples
+    Test using 16 prototypes on all testing set: 498/3396 misclassified samples
+    Test using 18 prototypes on all testing set: 486/3396 misclassified samples
+    Test using 20 prototypes on all testing set: 485/3396 misclassified samples
+    Test using 23 prototypes on all testing set: 738/3396 misclassified samples
+    Test using 26 prototypes on all testing set: 430/3396 misclassified samples
+    Test using 29 prototypes on all testing set: 403/3396 misclassified samples
+    Test using 31 prototypes on all testing set: 368/3396 misclassified samples
+    Test using 35 prototypes on all testing set: 612/3396 misclassified samples
+    Test using 38 prototypes on all testing set: 350/3396 misclassified samples
+    Test using 42 prototypes on all testing set: 358/3396 misclassified samples
+    Test using 48 prototypes on all testing set: 313/3396 misclassified samples
+    Test using 52 prototypes on all testing set: 292/3396 misclassified samples
+    Test using 57 prototypes on all testing set: 240/3396 misclassified samples
+    Test using 60 prototypes on all testing set: 230/3396 misclassified samples
+    Test using 64 prototypes on all testing set: 219/3396 misclassified samples
+    Test using 67 prototypes on all testing set: 192/3396 misclassified samples
+    Test using 72 prototypes on all testing set: 192/3396 misclassified samples
+    Test using 78 prototypes on all testing set: 337/3396 misclassified samples
+    Test using 80 prototypes on all testing set: 209/3396 misclassified samples
+    Test using 82 prototypes on all testing set: 202/3396 misclassified samples
+    Test using 88 prototypes on all testing set: 185/3396 misclassified samples
+    Test using 91 prototypes on all testing set: 200/3396 misclassified samples
+    Test using 93 prototypes on all testing set: 195/3396 misclassified samples
+    Test using 97 prototypes on all testing set: 199/3396 misclassified samples
+    Test using 101 prototypes on all testing set: 424/3396 misclassified samples
+    Test using 103 prototypes on all testing set: 232/3396 misclassified samples
+    Test using 107 prototypes on all testing set: 241/3396 misclassified samples
+    Test using 111 prototypes on all testing set: 261/3396 misclassified samples
+    Test using 115 prototypes on all testing set: 237/3396 misclassified samples
+    Test using 118 prototypes on all testing set: 217/3396 misclassified samples
+    Test using 122 prototypes on all testing set: 281/3396 misclassified samples
+    Test using 127 prototypes on all testing set: 211/3396 misclassified samples
+    Test using 131 prototypes on all testing set: 250/3396 misclassified samples
+    Test using 133 prototypes on all testing set: 245/3396 misclassified samples
+    Test using 135 prototypes on all testing set: 283/3396 misclassified samples
+    Test using 137 prototypes on all testing set: 257/3396 misclassified samples
+    Test using 139 prototypes on all testing set: 254/3396 misclassified samples
+    Test using 142 prototypes on all testing set: 245/3396 misclassified samples
+    Test using 144 prototypes on all testing set: 247/3396 misclassified samples
+    Test using 146 prototypes on all testing set: 244/3396 misclassified samples
+    Test using 148 prototypes on all testing set: 261/3396 misclassified samples
+    Test using 150 prototypes on all testing set: 256/3396 misclassified samples
+    Test using 151 prototypes on all testing set: 255/3396 misclassified samples
+    Test using 152 prototypes on all testing set: 254/3396 misclassified samples
+    Test using 153 prototypes on all testing set: 253/3396 misclassified samples
+    Test using 154 prototypes on all testing set: 248/3396 misclassified samples
+    Test using 155 prototypes on all testing set: 247/3396 misclassified samples
+    Test using 159 prototypes on all testing set: 208/3396 misclassified samples
+    Test using 161 prototypes on all testing set: 211/3396 misclassified samples
+    Test using 164 prototypes on all testing set: 203/3396 misclassified samples
+    Test using 166 prototypes on all testing set: 200/3396 misclassified samples
+    Test using 169 prototypes on all testing set: 209/3396 misclassified samples
+    Test using 171 prototypes on all testing set: 264/3396 misclassified samples
+    Test using 173 prototypes on all testing set: 262/3396 misclassified samples
+    Test using 175 prototypes on all testing set: 262/3396 misclassified samples
+    Test using 177 prototypes on all testing set: 267/3396 misclassified samples
+    Test using 178 prototypes on all testing set: 266/3396 misclassified samples
+    Test using 179 prototypes on all testing set: 265/3396 misclassified samples
+    Test using 181 prototypes on all testing set: 264/3396 misclassified samples
+    Test using 182 prototypes on all testing set: 261/3396 misclassified samples
+    Test using 183 prototypes on all testing set: 260/3396 misclassified samples
+    Test using 185 prototypes on all testing set: 259/3396 misclassified samples
+    Test using 186 prototypes on all testing set: 258/3396 misclassified samples
+    Test using 187 prototypes on all testing set: 254/3396 misclassified samples
+    Test using 188 prototypes on all testing set: 251/3396 misclassified samples
+    Test using 189 prototypes on all testing set: 246/3396 misclassified samples
+    Test using 190 prototypes on all testing set: 243/3396 misclassified samples
+    Test using 191 prototypes on all testing set: 242/3396 misclassified samples
+    Test using 192 prototypes on all testing set: 242/3396 misclassified samples
+    Test using 194 prototypes on all testing set: 327/3396 misclassified samples
+    Test using 195 prototypes on all testing set: 221/3396 misclassified samples
+    Test using 197 prototypes on all testing set: 207/3396 misclassified samples
+    Test using 198 prototypes on all testing set: 186/3396 misclassified samples
+    Test using 199 prototypes on all testing set: 138/3396 misclassified samples
+    Test using 200 prototypes on all testing set: 122/3396 misclassified samples
+    Test using 202 prototypes on all testing set: 115/3396 misclassified samples
+    Test using 204 prototypes on all testing set: 108/3396 misclassified samples
+    Test using 206 prototypes on all testing set: 103/3396 misclassified samples
+    Test using 207 prototypes on all testing set: 100/3396 misclassified samples
+    Test using 208 prototypes on all testing set: 96/3396 misclassified samples
+    Test using 209 prototypes on all testing set: 92/3396 misclassified samples
+    Test using 210 prototypes on all testing set: 90/3396 misclassified samples
+    Test using 211 prototypes on all testing set: 90/3396 misclassified samples
+    Test using 213 prototypes on all testing set: 87/3396 misclassified samples
+    Test using 215 prototypes on all testing set: 82/3396 misclassified samples
+    Test using 216 prototypes on all testing set: 81/3396 misclassified samples
+    Test using 217 prototypes on all testing set: 76/3396 misclassified samples
+    Test using 218 prototypes on all testing set: 74/3396 misclassified samples
+    Test using 219 prototypes on all testing set: 73/3396 misclassified samples
+    Test using 220 prototypes on all testing set: 74/3396 misclassified samples
+    Test using 223 prototypes on all testing set: 72/3396 misclassified samples
+    Test using 224 prototypes on all testing set: 69/3396 misclassified samples
+    Test using 225 prototypes on all testing set: 72/3396 misclassified samples
+    Test using 229 prototypes on all testing set: 52/3396 misclassified samples
+    Test using 231 prototypes on all testing set: 48/3396 misclassified samples
+    Test using 233 prototypes on all testing set: 42/3396 misclassified samples
+    Test using 234 prototypes on all testing set: 41/3396 misclassified samples
+    Test using 235 prototypes on all testing set: 40/3396 misclassified samples
+    Test using 236 prototypes on all testing set: 38/3396 misclassified samples
+    Test using 237 prototypes on all testing set: 36/3396 misclassified samples
+    Test using 238 prototypes on all testing set: 31/3396 misclassified samples
+    Test using 240 prototypes on all testing set: 28/3396 misclassified samples
+    Test using 241 prototypes on all testing set: 29/3396 misclassified samples
+    Test using 244 prototypes on all testing set: 29/3396 misclassified samples
+    Test using 246 prototypes on all testing set: 25/3396 misclassified samples
+    Test using 247 prototypes on all testing set: 24/3396 misclassified samples
+    Test using 249 prototypes on all testing set: 36/3396 misclassified samples
+    Test using 251 prototypes on all testing set: 29/3396 misclassified samples
+    Test using 253 prototypes on all testing set: 24/3396 misclassified samples
+    Test using 256 prototypes on all testing set: 90/3396 misclassified samples
+    Test using 257 prototypes on all testing set: 25/3396 misclassified samples
+    Test using 258 prototypes on all testing set: 23/3396 misclassified samples
+    Test using 259 prototypes on all testing set: 22/3396 misclassified samples
+    Test using 260 prototypes on all testing set: 20/3396 misclassified samples
+    Test using 261 prototypes on all testing set: 18/3396 misclassified samples
+    Test using 262 prototypes on all testing set: 17/3396 misclassified samples
+    Test using 263 prototypes on all testing set: 14/3396 misclassified samples
+    Test using 264 prototypes on all testing set: 14/3396 misclassified samples
+    Test using 267 prototypes on all testing set: 11/3396 misclassified samples
+    Test using 268 prototypes on all testing set: 10/3396 misclassified samples
+    Test using 269 prototypes on all testing set: 8/3396 misclassified samples
+    Test using 270 prototypes on all testing set: 8/3396 misclassified samples
+    Test using 272 prototypes on all testing set: 12/3396 misclassified samples
+    Test using 273 prototypes on all testing set: 10/3396 misclassified samples
+    Test using 275 prototypes on all testing set: 8/3396 misclassified samples
+    Test using 276 prototypes on all testing set: 7/3396 misclassified samples
+    Test using 277 prototypes on all testing set: 6/3396 misclassified samples
+    Test using 278 prototypes on all testing set: 5/3396 misclassified samples
+    Test using 279 prototypes on all testing set: 4/3396 misclassified samples
+    Test using 280 prototypes on all testing set: 3/3396 misclassified samples
+    Test using 281 prototypes on all testing set: 2/3396 misclassified samples
+    Test using 282 prototypes on all testing set: 1/3396 misclassified samples
+    Test using 283 prototypes on all testing set: 0/3396 misclassified samples
+    Deleteing unused prototypes
+    Final training set size: 283
+Step 1 finished in 31.87097477912903 seconds. Overall: 0.9627659574468085 Balanced score: 0.7972656731124523
+Doing step 1
+    Train shape: (3395, 52)
+ERROR The number of samples of the training set is inferior to the k parameter
+Traceback (most recent call last):
+  File "/home/ferran/Documents/master/IML/LazyLearning/iml-lazy-learning/src/main_multiple.py", line 49, in main
+    run(config_path, results_path, False, True)
+  File "/home/ferran/Documents/master/IML/LazyLearning/iml-lazy-learning/src/main.py", line 68, in main
+    algorithm.classify(train_loader, test_loader)
+  File "/home/ferran/Documents/master/IML/LazyLearning/iml-lazy-learning/src/algorithms/supervised_algorithm.py", line 50, in classify
+    self.train(train_values, train_labels, True)
+  File "/home/ferran/Documents/master/IML/LazyLearning/iml-lazy-learning/src/algorithms/types/mcnn.py", line 103, in train
+    self.knn)
+  File "/home/ferran/Documents/master/IML/LazyLearning/iml-lazy-learning/src/algorithms/types/mcnn.py", line 67, in _generate_prototypes
+    knn.train(this_iteration_prototypes, this_iteration_prototypes_labels, False)
+  File "/home/ferran/Documents/master/IML/LazyLearning/iml-lazy-learning/src/algorithms/types/knn.py", line 38, in train
+    raise Exception('The number of samples of the training set is inferior to the k parameter')
+Exception: The number of samples of the training set is inferior to the k parameter
+

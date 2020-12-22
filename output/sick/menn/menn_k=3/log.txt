@@ -1,0 +1,128 @@
+Preparing data
+     Total number of NaNs:  5914 ; relative:  5.226228349240015 %
+     Deleted because of too many NaN values the features with name: ['TBG']
+     Total number of NaNs:  5914 ; relative:  5.226228349240015 %
+     Deleted because of too many NaN values the features with name: ['TBG']
+     Total number of NaNs:  5914 ; relative:  5.226228349240015 %
+     Deleted because of too many NaN values the features with name: ['TBG']
+     Total number of NaNs:  5914 ; relative:  5.226228349240015 %
+     Deleted because of too many NaN values the features with name: ['TBG']
+     Total number of NaNs:  5914 ; relative:  5.226228349240015 %
+     Deleted because of too many NaN values the features with name: ['TBG']
+     Total number of NaNs:  5914 ; relative:  5.226228349240015 %
+     Deleted because of too many NaN values the features with name: ['TBG']
+     Total number of NaNs:  5914 ; relative:  5.226228349240015 %
+     Deleted because of too many NaN values the features with name: ['TBG']
+     Total number of NaNs:  5914 ; relative:  5.226228349240015 %
+     Deleted because of too many NaN values the features with name: ['TBG']
+     Total number of NaNs:  5914 ; relative:  5.226228349240015 %
+     Deleted because of too many NaN values the features with name: ['TBG']
+     Total number of NaNs:  5914 ; relative:  5.226228349240015 %
+     Deleted because of too many NaN values the features with name: ['TBG']
+Finished preparing data; elapsed time: 2.9879117012023926
+
+Running algorithm
+Starting 10 - fold
+Doing step 0
+    Train shape: (3396, 52)
+    Computing distances for sample 0
+    Computing distances for sample 1000
+    Computing distances for sample 2000
+    Computing distances for sample 3000
+    Train shape: (3176, 52)
+    Final training set size: 3176
+    Test shape: (376, 52)
+Step 1 finished in 1.6723659038543701 seconds. Overall: 0.9547872340425532 Balanced score: 0.7117255819682227
+Doing step 1
+    Train shape: (3395, 52)
+    Computing distances for sample 0
+    Computing distances for sample 1000
+    Computing distances for sample 2000
+    Computing distances for sample 3000
+    Train shape: (3175, 52)
+    Final training set size: 3175
+    Test shape: (377, 52)
+Step 2 finished in 1.761054277420044 seconds. Overall: 0.9602122015915119 Balanced score: 0.7348931466470154
+Doing step 2
+    Train shape: (3395, 52)
+    Computing distances for sample 0
+    Computing distances for sample 1000
+    Computing distances for sample 2000
+    Computing distances for sample 3000
+    Train shape: (3183, 52)
+    Final training set size: 3183
+    Test shape: (377, 52)
+Step 3 finished in 1.688969373703003 seconds. Overall: 0.9761273209549072 Balanced score: 0.8246745271432081
+Doing step 3
+    Train shape: (3395, 52)
+    Computing distances for sample 0
+    Computing distances for sample 1000
+    Computing distances for sample 2000
+    Computing distances for sample 3000
+    Train shape: (3173, 52)
+    Final training set size: 3173
+    Test shape: (377, 52)
+Step 4 finished in 1.703944206237793 seconds. Overall: 0.9681697612732095 Balanced score: 0.8001105379513633
+Doing step 4
+    Train shape: (3395, 52)
+    Computing distances for sample 0
+    Computing distances for sample 1000
+    Computing distances for sample 2000
+    Computing distances for sample 3000
+    Train shape: (3173, 52)
+    Final training set size: 3173
+    Test shape: (377, 52)
+Step 5 finished in 1.8619468212127686 seconds. Overall: 0.9814323607427056 Balanced score: 0.8735835694050991
+Doing step 5
+    Train shape: (3394, 52)
+    Computing distances for sample 0
+    Computing distances for sample 1000
+    Computing distances for sample 2000
+    Computing distances for sample 3000
+    Train shape: (3177, 52)
+    Final training set size: 3177
+    Test shape: (378, 52)
+Step 6 finished in 2.1223044395446777 seconds. Overall: 0.9603174603174603 Balanced score: 0.7145744029393754
+Doing step 6
+    Train shape: (3393, 52)
+    Computing distances for sample 0
+    Computing distances for sample 1000
+    Computing distances for sample 2000
+    Computing distances for sample 3000
+    Train shape: (3171, 52)
+    Final training set size: 3171
+    Test shape: (379, 52)
+Step 7 finished in 1.7441132068634033 seconds. Overall: 0.9577836411609498 Balanced score: 0.7131778212017587
+Doing step 7
+    Train shape: (3395, 52)
+    Computing distances for sample 0
+    Computing distances for sample 1000
+    Computing distances for sample 2000
+    Computing distances for sample 3000
+    Train shape: (3176, 52)
+    Final training set size: 3176
+    Test shape: (377, 52)
+Step 8 finished in 2.1652944087982178 seconds. Overall: 0.9681697612732095 Balanced score: 0.7594571358388602
+Doing step 8
+    Train shape: (3395, 52)
+    Computing distances for sample 0
+    Computing distances for sample 1000
+    Computing distances for sample 2000
+    Computing distances for sample 3000
+    Train shape: (3170, 52)
+    Final training set size: 3170
+    Test shape: (377, 52)
+Step 9 finished in 1.8611080646514893 seconds. Overall: 0.9681697612732095 Balanced score: 0.8407639400638663
+Doing step 9
+    Train shape: (3395, 52)
+    Computing distances for sample 0
+    Computing distances for sample 1000
+    Computing distances for sample 2000
+    Computing distances for sample 3000
+    Train shape: (3160, 52)
+    Final training set size: 3160
+    Test shape: (377, 52)
+Step 10 finished in 1.76739501953125 seconds. Overall: 0.9761273209549072 Balanced score: 0.8246745271432081
+Mean overall accuracy: 0.9671296823584624
+Mean balanced accuracy: 0.7797635190301978
+Finished running algorithm; elapsed time: 18.348785400390625

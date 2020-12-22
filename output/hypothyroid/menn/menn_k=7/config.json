@@ -1,0 +1,18 @@
+{
+  "data": {
+    "name": "hypothyroid"
+  },
+  "algorithm": {
+    "name": "menn",
+    "k": 7,
+    "distance_metric": "cityblock",
+    "voting": "majority",
+    "weighting": {
+      "name": "weighted_relieff",
+      "n_iterations": 2,
+      "nearest_values": 7,
+      "distance_metric": "cityblock"
+    }
+  },
+  "manual_seed": 0
+}

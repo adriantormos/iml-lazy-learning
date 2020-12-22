@@ -1,0 +1,118 @@
+Preparing data
+     Total number of NaNs:  5914 ; relative:  5.226228349240015 %
+     Deleted because of too many NaN values the features with name: ['TBG']
+     Total number of NaNs:  5914 ; relative:  5.226228349240015 %
+     Deleted because of too many NaN values the features with name: ['TBG']
+     Total number of NaNs:  5914 ; relative:  5.226228349240015 %
+     Deleted because of too many NaN values the features with name: ['TBG']
+     Total number of NaNs:  5914 ; relative:  5.226228349240015 %
+     Deleted because of too many NaN values the features with name: ['TBG']
+     Total number of NaNs:  5914 ; relative:  5.226228349240015 %
+     Deleted because of too many NaN values the features with name: ['TBG']
+     Total number of NaNs:  5914 ; relative:  5.226228349240015 %
+     Deleted because of too many NaN values the features with name: ['TBG']
+     Total number of NaNs:  5914 ; relative:  5.226228349240015 %
+     Deleted because of too many NaN values the features with name: ['TBG']
+     Total number of NaNs:  5914 ; relative:  5.226228349240015 %
+     Deleted because of too many NaN values the features with name: ['TBG']
+     Total number of NaNs:  5914 ; relative:  5.226228349240015 %
+     Deleted because of too many NaN values the features with name: ['TBG']
+     Total number of NaNs:  5914 ; relative:  5.226228349240015 %
+     Deleted because of too many NaN values the features with name: ['TBG']
+Finished preparing data; elapsed time: 2.954547643661499
+
+Running algorithm
+Starting 10 - fold
+Doing step 0
+    Train shape: (3397, 52)
+    Mode: drop3
+    Obtaining initial nearest neighbors for 3397 samples
+    Dropping misclassified samples
+    Sorting 3182 samples by distance to nearest neighbor
+    Deleting samples that decrease performance
+    Final training set size: 65
+Step 1 finished in 42.548556327819824 seconds. Overall: 0.9493333333333334 Balanced score: 0.6666666666666666
+Doing step 1
+    Train shape: (3394, 52)
+    Mode: drop3
+    Obtaining initial nearest neighbors for 3394 samples
+    Dropping misclassified samples
+    Sorting 3179 samples by distance to nearest neighbor
+    Deleting samples that decrease performance
+    Final training set size: 59
+Step 2 finished in 40.200530767440796 seconds. Overall: 0.9126984126984127 Balanced score: 0.629221054865754
+Doing step 2
+    Train shape: (3395, 52)
+    Mode: drop3
+    Obtaining initial nearest neighbors for 3395 samples
+    Dropping misclassified samples
+    Sorting 3169 samples by distance to nearest neighbor
+    Deleting samples that decrease performance
+    Final training set size: 47
+Step 3 finished in 41.71053409576416 seconds. Overall: 0.7506631299734748 Balanced score: 0.55970625798212
+Doing step 3
+    Train shape: (3395, 52)
+    Mode: drop3
+    Obtaining initial nearest neighbors for 3395 samples
+    Dropping misclassified samples
+    Sorting 3178 samples by distance to nearest neighbor
+    Deleting samples that decrease performance
+    Final training set size: 57
+Step 4 finished in 41.582430839538574 seconds. Overall: 0.5941644562334217 Balanced score: 0.43742017879948913
+Doing step 4
+    Train shape: (3394, 52)
+    Mode: drop3
+    Obtaining initial nearest neighbors for 3394 samples
+    Dropping misclassified samples
+    Sorting 3181 samples by distance to nearest neighbor
+    Deleting samples that decrease performance
+    Final training set size: 60
+Step 5 finished in 42.21664071083069 seconds. Overall: 0.6402116402116402 Balanced score: 0.4169054441260745
+Doing step 5
+    Train shape: (3394, 52)
+    Mode: drop3
+    Obtaining initial nearest neighbors for 3394 samples
+    Dropping misclassified samples
+    Sorting 3182 samples by distance to nearest neighbor
+    Deleting samples that decrease performance
+    Final training set size: 65
+Step 6 finished in 41.78160357475281 seconds. Overall: 0.3888888888888889 Balanced score: 0.37556600487634967
+Doing step 6
+    Train shape: (3394, 52)
+    Mode: drop3
+    Obtaining initial nearest neighbors for 3394 samples
+    Dropping misclassified samples
+    Sorting 3181 samples by distance to nearest neighbor
+    Deleting samples that decrease performance
+    Final training set size: 52
+Step 7 finished in 43.92179584503174 seconds. Overall: 0.671957671957672 Balanced score: 0.3772334293948127
+Doing step 7
+    Train shape: (3394, 52)
+    Mode: drop3
+    Obtaining initial nearest neighbors for 3394 samples
+    Dropping misclassified samples
+    Sorting 3176 samples by distance to nearest neighbor
+    Deleting samples that decrease performance
+    Final training set size: 67
+Step 8 finished in 45.51978135108948 seconds. Overall: 0.9312169312169312 Balanced score: 0.5304680038204393
+Doing step 8
+    Train shape: (3395, 52)
+    Mode: drop3
+    Obtaining initial nearest neighbors for 3395 samples
+    Dropping misclassified samples
+    Sorting 3176 samples by distance to nearest neighbor
+    Deleting samples that decrease performance
+    Final training set size: 57
+Step 9 finished in 45.040196895599365 seconds. Overall: 0.6153846153846154 Balanced score: 0.4812260536398467
+Doing step 9
+    Train shape: (3396, 52)
+    Mode: drop3
+    Obtaining initial nearest neighbors for 3396 samples
+    Dropping misclassified samples
+    Sorting 3178 samples by distance to nearest neighbor
+    Deleting samples that decrease performance
+    Final training set size: 62
+Step 10 finished in 45.85782289505005 seconds. Overall: 0.47606382978723405 Balanced score: 0.5127545876184715
+Mean overall accuracy: 0.6930582909685624
+Mean balanced accuracy: 0.4987167681790024
+Finished running algorithm; elapsed time: 430.3802344799042

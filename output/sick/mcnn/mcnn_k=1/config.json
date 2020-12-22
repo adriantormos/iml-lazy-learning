@@ -1,0 +1,18 @@
+{
+  "data": {
+    "name": "sick"
+  },
+  "algorithm": {
+    "name": "mcnn",
+    "k": 1,
+    "distance_metric": "euclidean",
+    "voting": "majority",
+    "weighting": {
+      "name": "weighted_relieff",
+      "n_iterations": 8,
+      "nearest_values": 5,
+      "distance_metric": "euclidean"
+    }
+  },
+  "manual_seed": 0
+}
