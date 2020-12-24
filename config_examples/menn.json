@@ -7,7 +7,7 @@
     "k": 1,
     "distance_metric": "euclidean",
     "voting": "majority",
-    "weighting": "equal"
+    "weighting": {"name": "equal"}
   },
   "manual_seed": 0
 }

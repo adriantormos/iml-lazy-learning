@@ -14,27 +14,21 @@ This README is divided into the following 4 sections:
 
 This component has 3 main funcionalities:
 
-- Show distribution of raw/preprocessed datasets via histogram/scatter plots.
-- Reduce the size of raw/preprocessed datasets via the following methods:
-    - An implementation of PCA with the numpy library
-    - The implementation of PCA by the sklearn library
-    - The implementation of an incremental PCA by the sklearn library
-    - The implementation of T-SNE by the sklearn library
-- Classify raw/preprocessed datasets via K-Means and show the classification results via plots/matrices
+- Run a KNN algorithm with user defined parameters
+- Run a KNN algorithm with instance reduction methods
 
 ## Files structure
 
 - config_examples: directory with some configuration files examples to use as input for the component (see How to run section for more information)
 - datasets: directory containing the raw datasets that are used by the component
-- output: directory containing the output results of the component. Concretely it cotains the numerical results and plots required for the second delivery of the IML subject
+- output: directory containing the output results of the component. Concretely it cotains the numerical results required for the third delivery of the IML subject
 - src: directory containing all the code of the component
     - data: directory containing the classes to implement the loading and preprocessing of datasets
     - algorithms: directory containing the classes to implement the different algorithms
-    - optimizers: directory containing the classes to optimize the different algorithms (e.g. selecting the best params or running more than one time and selecting the best results)
     - factory: directory containing the classes to connect the different algorithms/optimizers/datasets to the main file
     - auxiliary: directory containing auxiliary methods for other classes (e.g. loading of files)
-    - main: script file that runs the component
-    - visualize: script file with some visualization methods
+    - main: script file to run an experiment
+    - main: script file to run multiple sequential experiments
 
 ### How to install
 
@@ -60,115 +54,63 @@ In this part we explain briefly the different parts of the configuration file. T
     ```
   "data": {
         "name": "hypothyroid",
-        "balance": 0,
-        "classes_to_numerical": {
-            "compensated_hypothyroid": 0,
-            "negative": 1,
-            "primary_hypothyroid": 2,
-            "secondary_hypothyroid": 3
-        },
-        "only_numerical": 0,
-        "prepare": [{"name": "shuffle"}]
     }
   ```
-    - breast: A default configuration:
+    - sick: A default configuration:
     ```
   "data": {
-        "name": "breast",
-        "classes_to_numerical": {
-            "benign": 0,
-            "malignant": 1
-        },
-        "prepare": [{"name": "shuffle"}]
-    }
-  ```
-    - kropt: A default configuration:
-    ```
-  "data": {
-        "name": "kropt",
-        "balance": 0,
-        "prepare": [{"name": "shuffle"}]
-    }
-  ```
-    - csv: A default configuration to load any csv file
-    ```
-  "data": {
-        "name": "reduced",
-        "path": "../path_dataframe.csv",
-        "prepare": [{"name": "shuffle"}]
+        "name": "sick",
     }
   ```
 - algorithm (optional): configuration of the algorithm to run
-    - own_pca: A default configuration:
+    - knn: A default configuration without weighting:
     ```
   "algorithm": {
-	       "type": "factor_analysis",
-        "name": "our_pca",
-        "show_variance_plots": 1,
-	       "params": {"n_components": 2}
+	       "name": "knn",
+               "k": 5,
+               "distance_metric": "euclidean",
+	       "voting": "majority",
+	       "weighting": {"name": "equal"}
     }
   ```
-    - sklearn_decomposition_pca: A default configuration, all the parameters of the sklearn library can be added to the params attribute:
+    - knn: A default configuration with weighting:
     ```
   "algorithm": {
-	       "type": "factor_analysis",
-        "name": "decomposition_pca",
-	       "params": {"n_components": 2}
+	       "name": "knn",
+               "k": 5,
+               "distance_metric": "euclidean",
+	       "voting": "majority",
+	       "weighting": {"name": "weighted_relieff", "n_iterations": 5, "nearest_values": 10, "distance_metric": "euclidean"}
     }
   ```
-    - sklearn_incremental_pca: A default configuration, all the parameters of the sklearn library can be added to the params attribute:
+    - mcnn: A knn default configuration with mcnn:
     ```
   "algorithm": {
-	       "type": "factor_analysis",
-        "name": "incremental_pca",
-	       "params": {"n_components": 2, "batch_size": 100}
+	       "name": "mcnn",
+               "k": 1,
+               "distance_metric": "euclidean",
+	       "voting": "majority",
+	       "weighting": {"name": "equal"}
     }
   ```
-    - tsne: A default configuration, all the parameters of the sklearn library can be added to the params attribute:
+    - menn: A knn default configuration with menn:
     ```
   "algorithm": {
-	       "type": "factor_analysis",
-        "name": "tsne",
-	       "params": {"n_components": 2, "n_iter": 250}
+	       "name": "menn",
+               "k": 1,
+               "distance_metric": "euclidean",
+	       "voting": "majority",
+	       "weighting": {"name": "equal"}
     }
   ```
-    - kmeans: A default configuration:
+    - drop3: A knn default configuration with drop3:
     ```
   "algorithm": {
-	       "type": "unsupervised",
-        "name": "kmeans",
-	       "params": {"n_clusters": 2, "max_iter": 100}
+	       "name": "drop3",
+               "k": 1,
+               "distance_metric": "euclidean",
+	       "voting": "majority",
+	       "weighting": {"name": "equal"}
+               "mode": "drop3"
     }
   ```
-- optimizer (optional): configuration to optimize some algorithms
-    - kmeans: A default configuration to optimize the number of clusters of the kmeans algorithm with the davies-bouldin metric
-    ```
-  "optimizer": {
-        "name": "unsupervised",
-        "metrics": ["davies_bouldin"],
-        "params": [{"name": "n_clusters", "values": [2, 3, 4, 5, 6]}],
-        "use_best_parameters": 0,
-        "n_runs": 5
-    }
-  ```
-- charts: configuration to generate charts
-    - class_frequencies_separated: show class frequencies of the classes of the input dataset. A default configuration:
-    `{"name": "class_frequencies_separate"}`
-    - class_frequencies: show class frequencies of the classes of the input dataset and the predicted labels by the algorithm. A default configuration:
-    `{"name": "class_frequencies"}`
-    - show_metrics_table: show the specified metrics of the predicted clusters. A default configuration:
-    `{"name": "show_metrics_table", "metrics": ["davies_bouldin", "adjusted_rand"]}`
-    - show_classification_report: show classification report (precision, recall, accuracy...). A default configuration:
-    `{"name": "show_classification_report"}`
-    - show_confusion_matrix: show confusion matrix. A default configuration:
-    `{"name": "show_confusion_matrix"}`
-    - show_feature_histograms: show histograms for the features of the input dataset. A default configuration:
-    `{"name": "show_feature_histograms", "bins": 20}`
-    - show_correlation_among_variables: show correlation matrix among the features of the input dataset. A default configuration:
-    `{"name": "show_correlation_among_variables","figsize": [10,20], "title": "title"}`
-    - show_parallel_coordinates: show the parallel coordinates for the features of the input dataset. A default configuration:
-    `{"name": "show_parallel_coordinates","figsize": [10,20], "title": "title"}`
-    - show_pair_wise_scatter_plot: show the pair wise scatter plot for the features of the input dataset. A default configuration:
-    `{"name": "show_pair_wise_scatter_plot", "title": "title", "original": 1, "predicted": 0}`
-    - show_clusters_2d: show a representation in 2d of the input dataset. A default configuration:
-    `{"name": "show_clusters_2d","title": "Title","figsize": [10,20]}`
