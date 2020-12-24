@@ -1,4 +1,4 @@
-# IML - Lazy learning (TODO update this)
+# IML - Lazy learning
 
 _This component was created as a result of the IML subject in the MAI Masters degree._
 
@@ -12,7 +12,7 @@ This README is divided into the following 4 sections:
 
 ### Main functionalities
 
-This component has 3 main funcionalities:
+This component has 2 main funcionalities:
 
 - Run a KNN algorithm with user defined parameters
 - Run a KNN algorithm with instance reduction methods
@@ -48,8 +48,8 @@ An example:
 
 #### Configuration files
 
-In this part we explain briefly the different parts of the configuration file. The configuration file is splitted into 4 sections:
-- data: configuration of the dataset to use and the preprocessing steps
+In this part we explain briefly the different parts of the configuration file. The configuration file is splitted into 2 sections:
+- data: specify the dataset to use
     - hypothyroid: A default configuration:
     ```
   "data": {
@@ -62,7 +62,7 @@ In this part we explain briefly the different parts of the configuration file. T
         "name": "sick",
     }
   ```
-- algorithm (optional): configuration of the algorithm to run
+- algorithm: configuration of the algorithm to run
     - knn: A default configuration without weighting:
     ```
   "algorithm": {
