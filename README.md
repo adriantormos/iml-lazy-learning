@@ -67,8 +67,8 @@ In this part we explain briefly the different parts of the configuration file. T
     ```
   "algorithm": {
 	       "name": "knn",
-               "k": 5,
-               "distance_metric": "euclidean",
+           "k": 5,
+           "distance_metric": "euclidean",
 	       "voting": "majority",
 	       "weighting": {"name": "equal"}
     }
@@ -77,8 +77,8 @@ In this part we explain briefly the different parts of the configuration file. T
     ```
   "algorithm": {
 	       "name": "knn",
-               "k": 5,
-               "distance_metric": "euclidean",
+           "k": 5,
+           "distance_metric": "euclidean",
 	       "voting": "majority",
 	       "weighting": {"name": "weighted_relieff", "n_iterations": 5, "nearest_values": 10, "distance_metric": "euclidean"}
     }
@@ -87,8 +87,8 @@ In this part we explain briefly the different parts of the configuration file. T
     ```
   "algorithm": {
 	       "name": "mcnn",
-               "k": 1,
-               "distance_metric": "euclidean",
+           "k": 1,
+           "distance_metric": "euclidean",
 	       "voting": "majority",
 	       "weighting": {"name": "equal"}
     }
@@ -97,8 +97,8 @@ In this part we explain briefly the different parts of the configuration file. T
     ```
   "algorithm": {
 	       "name": "menn",
-               "k": 1,
-               "distance_metric": "euclidean",
+           "k": 1,
+           "distance_metric": "euclidean",
 	       "voting": "majority",
 	       "weighting": {"name": "equal"}
     }
@@ -107,10 +107,10 @@ In this part we explain briefly the different parts of the configuration file. T
     ```
   "algorithm": {
 	       "name": "drop3",
-               "k": 1,
-               "distance_metric": "euclidean",
+           "k": 1,
+           "distance_metric": "euclidean",
 	       "voting": "majority",
 	       "weighting": {"name": "equal"}
-               "mode": "drop3"
+           "mode": "drop3"
     }
   ```
